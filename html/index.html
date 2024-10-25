@@ -4,10 +4,73 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>HTML 5 Boilerplate</title>
-    <link rel="stylesheet" href="style.css" />
+    <title>Home</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <script src="/js/main.js"></script>
   </head>
+
   <body>
-    <script src="index.js"></script>
+    <header class="normal_nav">
+      <div></div>
+      <nav>
+        <ul class="nav_links">
+          <li><a href="index.html">Home</a></li>
+        </ul>
+      </nav>
+      <nav>
+        <ul class="nav_links">
+          <li><a href="menu.html">Menu</a></li>
+        </ul>
+      </nav>
+      <a href="index.html" class="logo_link">
+        <img class="logo" src="/images/logo1.png" alt="logo" />
+      </a>
+      <nav>
+        <ul class="nav_links">
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <nav>
+        <ul class="nav_links">
+          <li><a href="about.html">About</a></li>
+        </ul>
+      </nav>
+      <ul class="nav_buttons">
+        <li><a id="lang_button" href="">En</a></li>
+        <li><i id="login_icon" class="fa-solid fa-user"></i></li>
+      </ul>
+    </header>
+
+    <header class="mobile_nav">
+      <mobileNav>
+        <img class="mobile_logo" src="/images/logo1.png" alt="logo" />
+        <ul id="mobile_navlinks">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="menu.html">Menu</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="about.html">About</a></li>
+        </ul>
+        <div class="menu-icon">
+          <i class="fa-solid fa-bars" onclick="toggleMenu()"></i>
+        </div>
+      </mobileNav>
+
+      <script>
+        let menuList = document.getElementById("mobile_navlinks");
+        menuList.style.maxHeight = "0px";
+
+        function toggleMenu() {
+          if (menuList.style.maxHeight == "0px") {
+            menuList.style.maxHeight = "300px";
+          } else {
+            menuList.style.maxHeight = "0px";
+          }
+        }
+      </script>
+      <script
+        src="https://kit.fontawesome.com/f8e1a90484.js"
+        crossorigin="anonymous"
+      ></script>
+    </header>
   </body>
 </html>
