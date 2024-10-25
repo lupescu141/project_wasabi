@@ -4,14 +4,7 @@
   padding: 0;
   box-sizing: border-box;
   background-color: white;
-}
-
-body {
   font-family: Arial, sans-serif;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #f8f9fa;
 }
 
 /* Header */
@@ -244,6 +237,7 @@ body {
 
 .nav_buttons li a {
   transition: all 0.3s ease 0s;
+  text-decoration: none;
 }
 
 .mobile_nav {
