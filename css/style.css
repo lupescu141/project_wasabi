@@ -116,3 +116,38 @@
     border-radius: 1%;
   }
   
+  /* Contact Page Styles */
+  #contact-container {
+    display: flex;
+    width: 80%;
+    margin: 3% auto;
+    justify-content: space-between;
+  }
+  
+  #contact-text {
+    width: 45%;
+  }
+  
+  #contact-text h2 {
+    font-size: 1.2em;
+    margin-bottom: 1%;
+  }
+  
+  #contact-text p {
+    font-size: 1em;
+    color: #444;
+    line-height: 1.5em;
+  }
+  
+  #contact-map {
+    width: 45%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f0f0;
+    color: #666;
+    height: 300px;
+    border-radius: 1%;
+    text-align: center;
+  }
+  
