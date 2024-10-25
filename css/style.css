@@ -30,7 +30,7 @@
     padding: 0;
     margin: 2% auto;
     width: 80%;
-    height: 50vh;
+    height: 60vh; /* Modify the height of the list */
     overflow-y: auto;
     border: 0.1% solid #ccc;
     border-radius: 1%;
