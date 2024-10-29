@@ -14,7 +14,7 @@
   width: 100%;
 }
 
-/* Menu Page */
+/* Menu Page Start */
 .product-list {
   list-style: none;
   padding: 0;
@@ -65,7 +65,9 @@
   font-weight: bold;
 }
 
-/* About Page */
+/* Menu Page End */
+
+/* About Page Start */
 #header h1 {
   font-size: 1.5em;
   text-align: center;
@@ -106,7 +108,9 @@
   border-radius: 1%;
 }
 
-/* Contact Page Styles */
+/* About Page End */
+
+/* Contact Page Start */
 #contact-container {
   display: flex;
   width: 80%;
@@ -147,6 +151,71 @@
   padding: 0;
   background-color: white;
 }
+
+/* Contact Page End */
+
+/* Profile Page Start */
+/* Form Container */
+#profile-form {
+  max-width: 90%; /* Adjusts to screen size */
+  margin: 0 auto;
+  padding: 5%;
+  background-color: #f9f9f9;
+  border-radius: 1em;
+  box-shadow: 0 2% 4% rgba(0, 0, 0, 0.1);
+}
+
+/* Stack items with spacing */
+.form-group {
+  margin-bottom: 2em;
+}
+
+/* Labels */
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.5em;
+}
+
+/* Input Fields */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="password"] {
+  width: 100%;
+  padding: 0.8em;
+  font-size: 1em;
+  border: 0.1em solid #ccc;
+  border-radius: 0.5em;
+  outline: none;
+}
+
+/* Input focus effect */
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+input[type="password"]:focus {
+  border-color: #4CAF50;
+}
+
+/* Save Button */
+button[type="submit"] {
+  width: 100%;
+  padding: 1em;
+  font-size: 1.1em;
+  color: white;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 2em; /* Pill shape */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+/* Profile Page End */
 
 /* Navbar   start: */
 
