@@ -3,7 +3,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: white;
   font-family: Arial, sans-serif;
 }
 
@@ -109,7 +108,7 @@
 /* Contact Page Styles */
 #contact-container {
   display: flex;
-  width: 80%;
+  width: 90%;
   margin: 3% auto;
   justify-content: space-between;
 }
@@ -130,22 +129,16 @@
 }
 
 #contact-map {
-  width: 45%;
+  width: 100%;
   display: flex;
   align-items: center;
+  flex-direction: column;
   justify-content: center;
   background-color: #f0f0f0;
   color: #666;
-  height: 300px;
+  height: 500px;
   border-radius: 1%;
   text-align: center;
-}
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  background-color: white;
 }
 
 /* Navbar   start: */
@@ -262,7 +255,6 @@ mobileNav ul {
   gap: 30px;
   align-items: center;
   z-index: -1;
-  padding-top: 1em;
 }
 
 mobileNav ul li {
@@ -276,10 +268,12 @@ mobileNav ul li a {
 
 .menu-icon {
   display: none;
+  background-color: #0a2200;
 }
 
 .menu-icon i {
-  color: #0a2200;
+  color: #d2ffce;
+  background-color: #0a2200;
   font-size: 30px;
 }
 
@@ -299,24 +293,45 @@ mobileNav ul li a {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: #ffffff;
+    background: #0a2200;
     position: relative;
-    height: 70px;
+    height: 80px;
+  }
+
+  mobileNav a:hover {
+    background-color: #bae2b6;
+    transition: all 0.3s ease 0s;
+    color: #ff7f7f;
+  }
+
+  mobileNav a {
+    background-color: #d2ffce;
+    border-bottom: 2px #0a2200 solid;
+    padding-left: 50%;
+    padding-right: 50%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 1.5em;
   }
 
   mobileNav ul {
+    height: 196px;
     position: absolute;
-    top: 70px;
+    top: 80px;
     left: 0;
     right: 0;
     flex-direction: column;
     text-align: center;
-    background: #ffffff;
     gap: 0;
     overflow: hidden;
   }
+
+  mobileNav li {
+    height: 10em;
+    width: 100%;
+  }
+
   mobileNav ul li {
-    padding: 20px;
     padding-top: 0;
   }
   .menu-icon {
@@ -327,3 +342,7 @@ mobileNav ul li a {
   }
 }
 /* Mobile_nav End: */
+
+/* Map Start: */
+
+/* Map End: */
