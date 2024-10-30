@@ -3,7 +3,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: white;
   font-family: Arial, sans-serif;
 }
 
@@ -113,7 +112,7 @@
 /* Contact Page Start */
 #contact-container {
   display: flex;
-  width: 80%;
+  width: 90%;
   margin: 3% auto;
   justify-content: space-between;
 }
@@ -134,88 +133,17 @@
 }
 
 #contact-map {
-  width: 45%;
+  width: 100%;
   display: flex;
   align-items: center;
+  flex-direction: column;
   justify-content: center;
   background-color: #f0f0f0;
   color: #666;
-  height: 300px;
+  height: 500px;
   border-radius: 1%;
   text-align: center;
 }
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  background-color: white;
-}
-
-/* Contact Page End */
-
-/* Profile Page Start */
-/* Form Container */
-#profile-form {
-  max-width: 90%; /* Adjusts to screen size */
-  margin: 0 auto;
-  padding: 5%;
-  background-color: #f9f9f9;
-  border-radius: 1em;
-  box-shadow: 0 2% 4% rgba(0, 0, 0, 0.1);
-}
-
-/* Stack items with spacing */
-.form-group {
-  margin-bottom: 2em;
-}
-
-/* Labels */
-label {
-  display: block;
-  font-weight: bold;
-  margin-bottom: 0.5em;
-}
-
-/* Input Fields */
-input[type="text"],
-input[type="email"],
-input[type="tel"],
-input[type="password"] {
-  width: 100%;
-  padding: 0.8em;
-  font-size: 1em;
-  border: 0.1em solid #ccc;
-  border-radius: 0.5em;
-  outline: none;
-}
-
-/* Input focus effect */
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="tel"]:focus,
-input[type="password"]:focus {
-  border-color: #4CAF50;
-}
-
-/* Save Button */
-button[type="submit"] {
-  width: 100%;
-  padding: 1em;
-  font-size: 1.1em;
-  color: white;
-  background-color: #4CAF50;
-  border: none;
-  border-radius: 2em; /* Pill shape */
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-button[type="submit"]:hover {
-  background-color: #45a049;
-}
-
-/* Profile Page End */
 
 /* Navbar   start: */
 
@@ -331,7 +259,6 @@ mobileNav ul {
   gap: 30px;
   align-items: center;
   z-index: -1;
-  padding-top: 1em;
 }
 
 mobileNav ul li {
@@ -345,10 +272,12 @@ mobileNav ul li a {
 
 .menu-icon {
   display: none;
+  background-color: #0a2200;
 }
 
 .menu-icon i {
-  color: #0a2200;
+  color: #d2ffce;
+  background-color: #0a2200;
   font-size: 30px;
 }
 
@@ -368,24 +297,45 @@ mobileNav ul li a {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: #ffffff;
+    background: #0a2200;
     position: relative;
-    height: 70px;
+    height: 80px;
+  }
+
+  mobileNav a:hover {
+    background-color: #bae2b6;
+    transition: all 0.3s ease 0s;
+    color: #ff7f7f;
+  }
+
+  mobileNav a {
+    background-color: #d2ffce;
+    border-bottom: 2px #0a2200 solid;
+    padding-left: 50%;
+    padding-right: 50%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 1.5em;
   }
 
   mobileNav ul {
+    height: 196px;
     position: absolute;
-    top: 70px;
+    top: 80px;
     left: 0;
     right: 0;
     flex-direction: column;
     text-align: center;
-    background: #ffffff;
     gap: 0;
     overflow: hidden;
   }
+
+  mobileNav li {
+    height: 10em;
+    width: 100%;
+  }
+
   mobileNav ul li {
-    padding: 20px;
     padding-top: 0;
   }
   .menu-icon {
@@ -396,3 +346,71 @@ mobileNav ul li a {
   }
 }
 /* Mobile_nav End: */
+
+/* Map Start: */
+
+/* Map End: */
+
+
+/* Profile Page Start */
+/* Form Container */
+#profile-form {
+  max-width: 90%; /* Adjusts to screen size */
+  margin: 0 auto;
+  padding: 5%;
+  background-color: #f9f9f9;
+  border-radius: 1em;
+  box-shadow: 0 2% 4% rgba(0, 0, 0, 0.1);
+}
+
+/* Stack items with spacing */
+.form-group {
+  margin-bottom: 2em;
+}
+
+/* Labels */
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 0.5em;
+}
+
+/* Input Fields */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="password"] {
+  width: 100%;
+  padding: 0.8em;
+  font-size: 1em;
+  border: 0.1em solid #ccc;
+  border-radius: 0.5em;
+  outline: none;
+}
+
+/* Input focus effect */
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+input[type="password"]:focus {
+  border-color: #4CAF50;
+}
+
+/* Save Button */
+button[type="submit"] {
+  width: 100%;
+  padding: 1em;
+  font-size: 1.1em;
+  color: white;
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 2em; /* Pill shape */
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+/* Profile Page End */
