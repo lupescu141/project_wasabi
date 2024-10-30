@@ -258,7 +258,6 @@ mobileNav ul {
   display: flex;
   gap: 30px;
   align-items: center;
-  z-index: -1;
 }
 
 mobileNav ul li {
@@ -351,7 +350,6 @@ mobileNav ul li a {
 
 /* Map End: */
 
-
 /* Profile Page Start */
 /* Form Container */
 #profile-form {
@@ -393,7 +391,7 @@ input[type="text"]:focus,
 input[type="email"]:focus,
 input[type="tel"]:focus,
 input[type="password"]:focus {
-  border-color: #4CAF50;
+  border-color: #4caf50;
 }
 
 /* Save Button */
@@ -402,7 +400,7 @@ button[type="submit"] {
   padding: 1em;
   font-size: 1.1em;
   color: white;
-  background-color: #4CAF50;
+  background-color: #4caf50;
   border: none;
   border-radius: 2em; /* Pill shape */
   cursor: pointer;
