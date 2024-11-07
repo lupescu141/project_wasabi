@@ -147,7 +147,7 @@
 
 /* Navbar   start: */
 
-.normal_nav {
+nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -176,7 +176,7 @@
 }
 
 .nav_links a {
-  background-color: #ff7f7f;
+  background-color: #d2ffce;
   padding: 0.5em;
   border-radius: 20%;
   font-size: 1.5em;
@@ -195,7 +195,7 @@
 }
 
 .nav_links li a:hover {
-  color: #d2ffce;
+  color: #ff7f7f;
 }
 
 .nav_buttons {
@@ -209,26 +209,26 @@
 }
 
 #lang_button {
-  background-color: #d2ffce;
+  background-color: #ff9494;
   color: #0a2200;
   padding: 0.5em;
   border-radius: 20%;
 }
 
 #lang_button:hover {
-  color: #ff7f7f;
+  color: #d2ffce;
 }
 
 #login_icon {
   color: #0a2200;
-  background-color: #d2ffce;
+  background-color: #ff9494;
   padding: 0.7em;
   font-size: 1.5em;
   border-radius: 20%;
 }
 
 #login_icon:hover {
-  color: #ff7f7f;
+  color: #d2ffce;
   transition: all 0.3s ease 0s;
 }
 
