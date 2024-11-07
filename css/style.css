@@ -414,3 +414,86 @@ button[type="submit"]:hover {
 }
 
 /* Profile Page End */
+
+/* Index Page Start */
+.menu-carousel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10%;
+}
+
+.carousel-container {
+  overflow: hidden;
+}
+
+/* Card styling for the menu */
+.carousel-card {
+  display: flex;
+  align-items: center;
+  background-color: #f0f0f0;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  width: 80%;
+  max-width: 600px;
+  position: relative;
+  height: auto; /* Allow the height to adjust to content */
+}
+
+/* Button styling */
+.nav-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #0a2200;
+  color: #d2ffce;
+  border: none;
+  font-size: 2em;
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+#prev-button {
+  left: 10px; /* Position on the left edge */
+}
+
+#next-button {
+  right: 10px; /* Position on the right edge */
+}
+
+/* Styling for the daily menu */
+.menu-day {
+  text-align: center;
+  width: 100%;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.menu-day.active {
+  opacity: 1;
+}
+
+/* List styling for dishes and allergens */
+.day-menu-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
+}
+
+.day-menu-list li {
+  font-size: 1.1em;
+  margin-bottom: 10px;
+}
+
+.allergen {
+  color: #ff6347;
+  font-style: italic;
+  display: block; /* Move allergens below the product name */
+}
+/* Index Page End */
