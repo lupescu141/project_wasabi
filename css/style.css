@@ -495,3 +495,41 @@ button[type="submit"]:hover {
   display: block; /* Move allergens below the product name */
 }
 /* Index Page End */
+
+/* Bottom_nav start: */
+.bottom_nav nav {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 5em;
+}
+
+.bottom_nav ul {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+}
+
+.bottom_nav ul li {
+  text-decoration: none;
+  list-style: none;
+  display: flex;
+  align-items: center;
+}
+
+.facebook {
+  width: 3em;
+  border-radius: 20%;
+}
+.instagram {
+  width: 3.25em;
+}
+.google_maps {
+  width: 3.75em;
+}
+.hsl_icon {
+  width: 3em;
+  border-radius: 20%;
+}
+
+/* Bottom_nav end: */
