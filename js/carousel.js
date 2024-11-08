@@ -1,39 +1,71 @@
-// Initialize variables
-let currentIndex = 0;
-const menuDays = document.querySelectorAll(".menu-day");
-const totalDays = menuDays.length;
+// Store IDs of menu items for easy access
+const menuOrder = [
+  "monday",
+  "tuesday",
+  "wednesday",
+  "thursday",
+  "friday",
+  "saturday",
+  "sunday",
+];
+let activeIndex = 0; // Track the active menu day index
 
-// Function to show the menu for the current index
-function showMenu(index) {
-  // Hide all menus first
-  menuDays.forEach((menu, i) => {
-    menu.classList.remove("active"); // Remove active class from all
-    menu.style.display = "none"; // Hide all menus
+// Show the initial active menu
+document.getElementById(menuOrder[activeIndex]).classList.add("visible");
+
+function updateMenuDisplay(direction) {
+  const currentMenu = document.getElementById(menuOrder[activeIndex]);
+  let nextIndex;
+
+  if (direction === "next") {
+    nextIndex = (activeIndex + 1) % menuOrder.length;
+    currentMenu.classList.add("slide-out-left");
+
+    // Set up the new menu to slide in from the right, and hide it initially
+    const nextMenu = document.getElementById(menuOrder[nextIndex]);
+    nextMenu.classList.add("slide-in-right");
+    nextMenu.classList.remove("visible"); // Hide it first
+
+    // Trigger reflow for transition setup
+    void nextMenu.offsetWidth;
+
+    // Make visible to start slide-in animation
+    nextMenu.classList.add("visible");
+  } else {
+    nextIndex = (activeIndex - 1 + menuOrder.length) % menuOrder.length;
+    currentMenu.classList.add("slide-out-right");
+
+    // Set up the new menu to slide in from the left, and hide it initially
+    const nextMenu = document.getElementById(menuOrder[nextIndex]);
+    nextMenu.classList.add("slide-in-left");
+    nextMenu.classList.remove("visible"); // Hide it first
+
+    // Trigger reflow for transition setup
+    void nextMenu.offsetWidth;
+
+    // Make visible to start slide-in animation
+    nextMenu.classList.add("visible");
+  }
+
+  // Remove transition classes after the animation completes
+  currentMenu.addEventListener("transitionend", function handleTransitionEnd() {
+    currentMenu.classList.remove(
+      "visible",
+      "slide-out-left",
+      "slide-out-right"
+    );
+    nextMenu.classList.remove("slide-in-left", "slide-in-right");
+    currentMenu.removeEventListener("transitionend", handleTransitionEnd);
   });
 
-  // Show the current menu and set it active
-  menuDays[index].classList.add("active"); // Add active class to the current menu
-  menuDays[index].style.display = "block"; // Display the current menu
+  // Update activeIndex to the new menu
+  activeIndex = nextIndex;
 }
 
-// Function to handle button clicks
-function changeMenu(direction) {
-  // Update the index based on the direction
-  if (direction === "next") {
-    currentIndex = (currentIndex + 1) % totalDays; // Loop back to the start
-  } else {
-    currentIndex = (currentIndex - 1 + totalDays) % totalDays; // Loop to the end
-  }
-  showMenu(currentIndex); // Show the updated menu
-}
-
-// Set up button event listeners
-document
-  .getElementById("prev-button")
-  .addEventListener("click", () => changeMenu("prev"));
+// Button event listeners
 document
   .getElementById("next-button")
-  .addEventListener("click", () => changeMenu("next"));
-
-// Show the first menu on page load
-showMenu(currentIndex);
+  .addEventListener("click", () => updateMenuDisplay("next"));
+document
+  .getElementById("prev-button")
+  .addEventListener("click", () => updateMenuDisplay("prev"));

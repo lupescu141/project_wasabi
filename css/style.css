@@ -422,6 +422,9 @@ button[type="submit"]:hover {
 }
 
 .carousel-container {
+  position: relative;
+  height: 200px;
+  width: 100%;
   overflow: hidden;
 }
 
@@ -436,7 +439,8 @@ button[type="submit"]:hover {
   width: 80%;
   max-width: 600px;
   position: relative;
-  height: auto; /* Allow the height to adjust to content */
+  height: 500px; /* Set a fixed height */
+  overflow: hidden; /* Prevent overflow within the card */
 }
 
 /* Button styling */
@@ -455,6 +459,7 @@ button[type="submit"]:hover {
   align-items: center;
   justify-content: center;
   border-radius: 50%;
+  z-index: 3; /* Ensure buttons are always on top of the menu */
 }
 
 #prev-button {
@@ -467,14 +472,38 @@ button[type="submit"]:hover {
 
 /* Styling for the daily menu */
 .menu-day {
-  text-align: center;
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   opacity: 0;
-  transition: opacity 0.5s ease;
+  visibility: hidden;
+  transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
-.menu-day.active {
+/* For active day */
+.menu-day.visible {
   opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+}
+
+.menu-day.slide-in-right {
+  transform: translateX(100%);  /* Start offscreen to the right */
+}
+
+.menu-day.slide-in-left {
+  transform: translateX(-100%); /* Start offscreen to the left */
+}
+
+.menu-day.slide-out-left {
+  opacity: 0;
+  transform: translateX(-150%);
+}
+
+.menu-day.slide-out-right {
+  opacity: 0;
+  transform: translateX(150%);
 }
 
 /* List styling for dishes and allergens */
