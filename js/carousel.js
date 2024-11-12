@@ -1,71 +1,44 @@
-// Store IDs of menu items for easy access
-const menuOrder = [
-  "monday",
-  "tuesday",
-  "wednesday",
-  "thursday",
-  "friday",
-  "saturday",
-  "sunday",
-];
-let activeIndex = 0; // Track the active menu day index
+// Set the initial index of the menu day
+let currentIndex = 0;
 
-// Show the initial active menu
-document.getElementById(menuOrder[activeIndex]).classList.add("visible");
+// Get all the menu day elements, navigation buttons, and carousel wrapper
+const days = document.querySelectorAll(".menu-day");
+const prevButton = document.getElementById("prev-button");
+const nextButton = document.getElementById("next-button");
+const carouselWrapper = document.querySelector(".carousel-wrapper");
 
-function updateMenuDisplay(direction) {
-  const currentMenu = document.getElementById(menuOrder[activeIndex]);
-  let nextIndex;
+// Function to change the active menu day
+function changeDay(newIndex) {
+  // Remove the active class from the current day
+  days[currentIndex].classList.remove("active");
 
-  if (direction === "next") {
-    nextIndex = (activeIndex + 1) % menuOrder.length;
-    currentMenu.classList.add("slide-out-left");
+  // Calculate the new index and wrap around if necessary
+  currentIndex = newIndex;
+  if (currentIndex < 0) currentIndex = days.length - 1; // If the new index is less than 0, go to the last day
+  if (currentIndex >= days.length) currentIndex = 0; // If the new index is more than the last day, go to the first day
 
-    // Set up the new menu to slide in from the right, and hide it initially
-    const nextMenu = document.getElementById(menuOrder[nextIndex]);
-    nextMenu.classList.add("slide-in-right");
-    nextMenu.classList.remove("visible"); // Hide it first
+  // Add the active class to the new day
+  days[currentIndex].classList.add("active");
 
-    // Trigger reflow for transition setup
-    void nextMenu.offsetWidth;
-
-    // Make visible to start slide-in animation
-    nextMenu.classList.add("visible");
-  } else {
-    nextIndex = (activeIndex - 1 + menuOrder.length) % menuOrder.length;
-    currentMenu.classList.add("slide-out-right");
-
-    // Set up the new menu to slide in from the left, and hide it initially
-    const nextMenu = document.getElementById(menuOrder[nextIndex]);
-    nextMenu.classList.add("slide-in-left");
-    nextMenu.classList.remove("visible"); // Hide it first
-
-    // Trigger reflow for transition setup
-    void nextMenu.offsetWidth;
-
-    // Make visible to start slide-in animation
-    nextMenu.classList.add("visible");
-  }
-
-  // Remove transition classes after the animation completes
-  currentMenu.addEventListener("transitionend", function handleTransitionEnd() {
-    currentMenu.classList.remove(
-      "visible",
-      "slide-out-left",
-      "slide-out-right"
-    );
-    nextMenu.classList.remove("slide-in-left", "slide-in-right");
-    currentMenu.removeEventListener("transitionend", handleTransitionEnd);
-  });
-
-  // Update activeIndex to the new menu
-  activeIndex = nextIndex;
+  // Apply the sliding effect by moving the carousel wrapper
+  carouselWrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
 }
 
-// Button event listeners
-document
-  .getElementById("next-button")
-  .addEventListener("click", () => updateMenuDisplay("next"));
-document
-  .getElementById("prev-button")
-  .addEventListener("click", () => updateMenuDisplay("prev"));
+// Event listener for the previous button
+prevButton.addEventListener("click", function () {
+  changeDay(currentIndex - 1); // Go to the previous day
+});
+
+// Event listener for the next button
+nextButton.addEventListener("click", function () {
+  changeDay(currentIndex + 1); // Go to the next day
+});
+
+// Initialize the first day as active
+days[currentIndex].classList.add("active");
+carouselWrapper.style.transform = `translateX(-${currentIndex * 100}%)`; // Position the carousel to show the first day
+
+// Optionally, if you want to automatically rotate between days, you can use setInterval
+// setInterval(function() {
+//   changeDay(currentIndex + 1);
+// }, 5000); // Change the menu every 5 seconds (for example)
