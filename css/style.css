@@ -4,6 +4,7 @@
   padding: 0;
   box-sizing: border-box;
   font-family: Arial, sans-serif;
+  box-sizing: border-box;
 }
 
 /* Header */
@@ -414,115 +415,105 @@ button[type="submit"]:hover {
 /* Profile Page End */
 
 /* Index Page Start */
-.menu-carousel {
+
+/* Carousel Wrapper (Center the carousel in the middle of the screen) */
+.menu-carousel-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 10%;
-}
-
-.carousel-container {
-  position: relative;
-  height: 200px;
-  width: 100%;
-  overflow: hidden;
-}
-
-/* Card styling for the menu */
-.carousel-card {
-  display: flex;
-  align-items: center;
-  background-color: #f0f0f0;
+  min-height: calc(100vh - 6em); /* Adjust height to account for navbar */
   padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  width: 80%;
-  max-width: 600px;
-  position: relative;
-  height: 500px; /* Set a fixed height */
-  overflow: hidden; /* Prevent overflow within the card */
 }
 
-/* Button styling */
+/* Space between navbar and carousel */
+.menu-carousel {
+  margin-top: 7em; /* Adjust the value for desired spacing */
+}
+
+
+/* Carousel Card */
+.carousel-card {
+  margin: 0 auto; /* Ensures it centers in the wrapper */
+  width: 80%;
+  max-width: 1200px;
+  background-color: #f4f4f4;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+  padding: 20px;
+  position: relative;
+}
+
+/* Carousel Wrapper (Holds all the days of the menu) */
+.carousel-wrapper {
+  position: relative;
+  display: flex;
+  width: 100%;
+  transition: transform 0.5s ease-in-out; /* This enables the sliding transition */
+}
+
+/* Menu Day (each individual day's content) */
+.menu-day {
+  flex: 0 0 100%; /* Each day will take up 100% of the carousel width */
+  width: 100%;
+  padding: 20px;
+  text-align: center;
+  opacity: 0; /* Initially hidden */
+  transition: opacity 1s ease-in-out;
+}
+
+/* Active class to display the current day's menu */
+.menu-day.active {
+  opacity: 1; /* Make the active day visible */
+}
+
+/* Navigation Buttons */
 .nav-button {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color: #0a2200;
-  color: #d2ffce;
+  background-color: rgba(0, 0, 0, 0.5); /* Button background color */
+  color: white;
+  font-size: 2rem;
   border: none;
-  font-size: 2em;
+  padding: 0.5rem;
   cursor: pointer;
-  width: 50px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  z-index: 3; /* Ensure buttons are always on top of the menu */
+  z-index: 1;
 }
 
+/* Previous Button */
 #prev-button {
-  left: 10px; /* Position on the left edge */
+  left: 10px; /* Position the previous button */
 }
 
+/* Next Button */
 #next-button {
-  right: 10px; /* Position on the right edge */
+  right: 10px; /* Position the next button */
 }
 
-/* Styling for the daily menu */
-.menu-day {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.5s ease, transform 0.5s ease;
+/* Hover Effect for Navigation Buttons */
+.nav-button:hover {
+  background-color: rgba(0, 0, 0, 0.8); /* Darken the button when hovered */
 }
 
-/* For active day */
-.menu-day.visible {
-  opacity: 1;
-  visibility: visible;
-  transform: translateX(0);
+/* Mobile Responsive */
+@media (max-width: 900px) {
+  /* Adjust the font size for smaller screens */
+  .carousel-card {
+    width: 100%; /* Make carousel take full width on mobile */
+    padding: 10px;
+  }
+
+  .nav-button {
+    font-size: 1.5rem;
+    padding: 0.3rem;
+  }
+
+  .menu-day {
+    padding: 15px;
+  }
 }
 
-.menu-day.slide-in-right {
-  transform: translateX(100%);  /* Start offscreen to the right */
-}
-
-.menu-day.slide-in-left {
-  transform: translateX(-100%); /* Start offscreen to the left */
-}
-
-.menu-day.slide-out-left {
-  opacity: 0;
-  transform: translateX(-150%);
-}
-
-.menu-day.slide-out-right {
-  opacity: 0;
-  transform: translateX(150%);
-}
-
-/* List styling for dishes and allergens */
-.day-menu-list {
-  list-style: none;
-  padding: 0;
-  margin-top: 10px;
-}
-
-.day-menu-list li {
-  font-size: 1.1em;
-  margin-bottom: 10px;
-}
-
-.allergen {
-  color: #ff6347;
-  font-style: italic;
-  display: block; /* Move allergens below the product name */
-}
 /* Index Page End */
 
 /* Bottom_nav start: */
@@ -597,3 +588,38 @@ button[type="submit"]:hover {
 }
 
 /* Bottom_nav end: */
+
+/* Employee contacts Start */
+.employee_contacts {
+  padding: 50px;
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.employee_contacts h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.contact_list {
+  list-style: none;
+  padding: 0;
+}
+
+.contact_list li {
+  margin-bottom: 15px;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.contact_list li strong {
+  color: #333;
+}
+
+.contact_list li:last-child {
+  border-bottom: none;
+}
+/* Employee contacts End */
