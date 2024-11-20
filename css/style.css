@@ -421,20 +421,27 @@ button[type="submit"]:hover {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* Full screen height */
+  min-height: calc(100vh - 6em); /* Adjust height to account for navbar */
   padding: 20px;
 }
 
+/* Space between navbar and carousel */
+.menu-carousel {
+  margin-top: 7em; /* Adjust the value for desired spacing */
+}
+
+
 /* Carousel Card */
 .carousel-card {
-  position: relative;
-  width: 80%; /* Adjust this width as needed */
-  max-width: 1200px; /* Maximum width for large screens */
-  background-color: #f4f4f4; /* Background color for the card */
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Optional shadow for aesthetics */
-  border-radius: 8px; /* Optional rounded corners */
-  overflow: hidden; /* Ensure no content overflows */
+  margin: 0 auto; /* Ensures it centers in the wrapper */
+  width: 80%;
+  max-width: 1200px;
+  background-color: #f4f4f4;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
   padding: 20px;
+  position: relative;
 }
 
 /* Carousel Wrapper (Holds all the days of the menu) */
@@ -581,3 +588,38 @@ button[type="submit"]:hover {
 }
 
 /* Bottom_nav end: */
+
+/* Employee contacts Start */
+.employee_contacts {
+  padding: 50px;
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.employee_contacts h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.contact_list {
+  list-style: none;
+  padding: 0;
+}
+
+.contact_list li {
+  margin-bottom: 15px;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.contact_list li strong {
+  color: #333;
+}
+
+.contact_list li:last-child {
+  border-bottom: none;
+}
+/* Employee contacts End */
