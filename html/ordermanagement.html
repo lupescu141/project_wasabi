@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Order Management</title>
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+  <div class="orders">
+    <h1>Orders</h1>
+    
+    <!-- Search Bar -->
+    <input type="text" id="searchBar" placeholder="Search by Order Number..." />
+
+    <!-- Filters -->
+    <div class="filter-options">
+        <label>
+          <input type="checkbox" id="filterWaiting" class="filter-checkbox"/>
+          Waiting
+        </label>
+        <label>
+          <input type="checkbox" id="filterInProgress" class="filter-checkbox"/>
+          In Progress
+        </label>
+        <label>
+          <input type="checkbox" id="filterDone" class="filter-checkbox"/>
+          Done
+        </label>
+    </div>
+      
+
+    <!-- Orders List -->
+    <div class="orders-list">
+      <div class="orders-header">
+        <div class="ordercolumn order-number">Order Number</div>
+        <div class="ordercolumn order-time">Order Time</div>
+        <div class="ordercolumn order-progress">Progress</div>
+      </div>
+      <div id="ordersContainer" class="orders-container">
+        <!-- Orders will be dynamically inserted here -->
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/ordermanagement.js"></script>
+</body>
+</html>
