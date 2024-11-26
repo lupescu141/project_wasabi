@@ -9,7 +9,7 @@
 
 /* Header */
 #header {
-  margin-top: 12%;
+  margin-top: 7em;
   text-align: center;
   width: 100%;
 }
@@ -20,11 +20,12 @@
   padding: 0;
   margin: 2% auto;
   width: 80%;
-  height: 60vh; /* Modify the height of the list */
+  height: 26em; /* Modify the height of the list */
   overflow-y: auto;
   border: 0.1% solid #ccc;
   border-radius: 1%;
-  background-color: #fff;
+  background-color: #d2ffce;
+  box-shadow: 0px 2px 11px 0px #0a2200;
 }
 
 .product-item {
@@ -111,6 +112,7 @@
 /* About Page End */
 
 /* Contact Page Start */
+
 #contact-container {
   display: flex;
   width: 90%;
@@ -156,7 +158,7 @@ nav {
   align-items: center;
   box-shadow: 0px 2px 11px 0px #0a2200;
   padding: 30px 20px;
-  height: 6em;
+  height: 4em;
   background-color: #0a2200;
   z-index: 3;
 }
@@ -167,7 +169,8 @@ nav {
   overflow: hidden;
   border-radius: 50%;
   box-shadow: 0px 0px 3px 8px #0a2200;
-  height: 11em;
+  height: 9em;
+  margin-left: 0.5em;
 }
 
 .logo_link {
@@ -181,9 +184,9 @@ nav {
 
 .nav_links a {
   background-color: #d2ffce;
-  padding: 0.5em;
+  padding: 0.4em;
   border-radius: 20%;
-  font-size: 1.5em;
+  font-size: 1.25em;
   color: #0a2200;
   text-decoration: none;
 }
@@ -216,6 +219,7 @@ nav {
   background-color: #ff9494;
   color: #0a2200;
   padding: 0.5em;
+  font-size: 1em;
   border-radius: 20%;
 }
 
@@ -226,8 +230,8 @@ nav {
 #login_icon {
   color: #0a2200;
   background-color: #ff9494;
-  padding: 0.7em;
-  font-size: 1.5em;
+  padding: 0.5em;
+  font-size: 1em;
   border-radius: 20%;
 }
 
@@ -428,6 +432,10 @@ button[type="submit"]:hover {
   padding: 20px;
 }
 
+.day-menu-list {
+  list-style: none;
+}
+
 /* Spacing*/
 .menu-carousel {
   margin-top: 10px; /* Adjust the value for desired spacing */
@@ -437,10 +445,10 @@ button[type="submit"]:hover {
 /* Carousel Card */
 .carousel-card {
   margin: 0 auto; /* Ensures it centers in the wrapper */
-  width: 40%;
+  width: 58%;
   max-width: 1200px;
   background-color: #f4f4f4;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 2px 11px 0px #0a2200;
   border-radius: 8px;
   overflow: hidden;
   padding: 20px;
@@ -499,17 +507,18 @@ button[type="submit"]:hover {
 
 /* Hover Effect for Navigation Buttons */
 .nav-button:hover {
-  background-color: #0a2200; /* Darken the button when hovered */
+  transition: 0.3s;
+  background-color: orange; /* Darken the button when hovered */
 }
 
 .home_banner {
-  margin-bottom: 5em;
-  margin-top: 8em;
-  height: 30em;
+  margin-bottom: 1em;
+  margin-top: 0em;
+  height: 18em;
   width: 100%;
   /*background: IMAGE*/
   display: flex;
-  align-items: center;
+  align-items: top;
   justify-content: center;
   text-align: center;
   overflow: hidden;
@@ -517,7 +526,7 @@ button[type="submit"]:hover {
 
 .home_banner_img {
   position: relative;
-  z-index: 1; /* Bring content above overlay */
+  z-index: -1; /* Bring content above overlay */
   max-width: 100%;
   max-height: 100%;
 }
@@ -580,7 +589,7 @@ button[type="submit"]:hover {
   position: fixed;
   bottom: 0;
   width: 100%;
-  height: 5em;
+  height: 3em;
   z-index: 2;
 }
 
@@ -598,51 +607,51 @@ button[type="submit"]:hover {
 }
 
 .facebook {
-  width: 3em;
+  width: 2em;
   border-radius: 20%;
   box-shadow: 0px 0px 12px 2px rgb(0 0 0);
   transition: all 0.3s;
 }
 
 .facebook:hover {
-  width: 3.75em;
+  width: 2.75em;
   transition: all 0.3s;
   cursor: pointer;
 }
 
 .instagram {
-  width: 3em;
+  width: 2em;
   box-shadow: 0px 0px 12px 2px rgb(0 0 0);
   border-radius: 20%;
   transition: all 0.3s;
 }
 
 .instagram:hover {
-  width: 3.75em;
+  width: 2.75em;
   transition: all 0.3s;
   cursor: pointer;
 }
 
 .google_maps {
-  width: 3.75em;
+  width: 2.25em;
   transition: all 0.3s;
 }
 
 .google_maps:hover {
-  width: 4.5em;
+  width: 3em;
   transition: all 0.3s;
   cursor: pointer;
 }
 
 .hsl_icon {
-  width: 3em;
+  width: 2em;
   border-radius: 20%;
   transition: all 0.3s;
   box-shadow: 0px 0px 12px 2px rgb(0 0 0);
 }
 
 .hsl_icon:hover {
-  width: 3.75em;
+  width: 2.75em;
   transition: all 0.3s;
   cursor: pointer;
 }
