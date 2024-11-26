@@ -62,6 +62,16 @@ app.post("/api/users", (req, res) => {
   });
 });
 
+// Fetch employee contact information
+app.get("/api/employees", (req, res) => {
+  const sql = "SELECT name, title, email, phone FROM employees";
+
+  db.query(sql, (err, results) => {
+    if (err) return res.status(500).send(err);
+    res.json(results);
+  });
+});
+
 // Start server
 app.listen(3000, () => {
   console.log("Server running on http://localhost:3000");
