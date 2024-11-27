@@ -7,32 +7,23 @@ const path = require("path");
 const port = process.env.PORT || 3000;
 const router = express.Router();
 
-//File locations.
+//Media files for express app in /puclic folder.
 app.use(express.static(__dirname + "/public"));
 
 //Getting html files.
-app.get("/home", function (req, res) {
-  res.render(path.join(__dirname, "/index.html"));
-});
+const pagelist = [
+  { path: "/home", file: "/index.html" },
+  { path: "/menu", file: "/menu.html" },
+  { path: "/contact", file: "/contact.html" },
+  { path: "/editprofile", file: "/editprofile.html" },
+  { path: "/ordermanagement", file: "/ordermanagement" },
+  { path: "/employeecontacts", file: "/employeecontacts" },
+];
 
-app.get("/menu", function (req, res) {
-  res.render(__dirname + "/menu.html");
-});
-
-app.get("/contact", function (req, res) {
-  res.render(__dirname + "/contact.html");
-});
-
-app.get("/editprofile", function (req, res) {
-  res.render(__dirname + "/editprofile.html");
-});
-
-app.get("/ordermanagement", function (req, res) {
-  res.render(__dirname + "/ordermanagement.html");
-});
-
-app.get("/employeecontacts", function (req, res) {
-  res.render(__dirname + "/employeecontacts.html");
+pagelist.forEach((element) => {
+  app.get(element.path, function (req, res) {
+    res.render(path.join(__dirname, element.file));
+  });
 });
 
 app.listen(port, () => {
