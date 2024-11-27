@@ -16,13 +16,14 @@ const pagelist = [
   { path: "/menu", file: "/menu.html" },
   { path: "/contact", file: "/contact.html" },
   { path: "/editprofile", file: "/editprofile.html" },
-  { path: "/ordermanagement", file: "/ordermanagement" },
-  { path: "/employeecontacts", file: "/employeecontacts" },
+  { path: "/ordermanagement", file: "/ordermanagement.html" },
+  { path: "/employeecontacts", file: "/employeecontacts.html" },
+  { path: "/about", file: "/about.html" },
 ];
 
 pagelist.forEach((element) => {
   app.get(element.path, function (req, res) {
-    res.render(path.join(__dirname, element.file));
+    res.sendFile(path.join(__dirname, `/public${element.file}`));
   });
 });
 

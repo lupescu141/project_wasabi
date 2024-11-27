@@ -14,6 +14,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>About Us</title>
     <link rel="stylesheet" href="style.css" />
+    <script src="loginmodal.js" defer></script>
   </head>
   <body>
     <!-- Navbar section -->
@@ -23,19 +24,19 @@
           <li><a id="lang_button" href="">En</a></li>
         </ul>
         <ul class="nav_links">
-          <li><a href="index.html">Home</a></li>
+          <li><a href="home">Home</a></li>
         </ul>
         <ul class="nav_links">
-          <li><a href="menu.html">Menu</a></li>
+          <li><a href="menu">Menu</a></li>
         </ul>
-        <a href="index.html" class="logo_link">
+        <a href="home" class="logo_link">
           <img class="logo" src="logo1.png" alt="logo" />
         </a>
         <ul class="nav_links">
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href="contact">Contact</a></li>
         </ul>
         <ul class="nav_links">
-          <li><a href="about.html">About</a></li>
+          <li><a href="about">About</a></li>
         </ul>
         <ul class="nav_buttons">
           <li><i id="login_icon" class="fa-solid fa-user"></i></li>
@@ -57,7 +58,9 @@
           <input type="email" id="loginemail" placeholder="Email" />
           <input type="password" id="loginpassword" placeholder="Password" />
           <button id="login_button">Login</button>
-          <p id="loginerror_message" style="color:red; display:none;">Incorrect Email or Password</p>
+          <p id="loginerror_message" style="color: red; display: none">
+            Incorrect Email or Password
+          </p>
           <a href="../html/registerprofile.html">Register</a>
         </div>
       </div>
@@ -67,10 +70,10 @@
       <mobileNav>
         <img class="mobile_logo" src="logo1.png" alt="logo" />
         <ul id="mobile_navlinks">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="menu.html">Menu</a></li>
-          <li><a href="contact.html">Contact</a></li>
-          <li><a href="about.html">About</a></li>
+          <li><a href="home">Home</a></li>
+          <li><a href="menu">Menu</a></li>
+          <li><a href="contact">Contact</a></li>
+          <li><a href="about">About</a></li>
         </ul>
         <div class="menu-icon">
           <i class="fa-solid fa-bars" onclick="toggleMenu()"></i>
@@ -158,6 +161,5 @@
         </ul>
       </nav>
     </header>
-    <script src="../public/loginmodal.js"></script>
   </body>
 </html>
