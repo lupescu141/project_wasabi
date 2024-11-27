@@ -44,6 +44,29 @@
     </div>
   </div>
 
+  <!-- Modal -->
+  <div id="orderDetailsModal" class="ordersmodal hidden">
+    <div class="ordersmodal-content">
+      <span id="closeModal" class="close">&times;</span>
+      <h2>Order Details</h2>
+      <p><strong>Order Number:</strong> <span id="modalOrderNumber"></span></p>
+      <p><strong>Date and Time:</strong> <span id="modalOrderTime"></span></p>
+      <p><strong>Status:</strong>
+        <select id="modalOrderStatus">
+          <option value="Waiting">Waiting</option>
+          <option value="In progress">In Progress</option>
+          <option value="Done">Done</option>
+        </select>
+      </p>
+      <div id="modalOrderProducts">
+        <p><strong>Products:</strong></p>
+        <ul id="productList"></ul>
+        <p><strong>Total Price:</strong> $<span id="totalPrice"></span></p>
+      </div>
+      <button id="saveChanges">Save Changes</button>
+    </div>
+  </div>
+
   <script src="../js/ordermanagement.js"></script>
 </body>
 </html>
