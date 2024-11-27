@@ -106,6 +106,22 @@ app.put("/api/orders/:id", (req, res) => {
   });
 });
 
+// Endpoint to verify user login
+app.post("/api/users/login", (req, res) => {
+  const { email, password } = req.body;
+  const sql = "SELECT * FROM users WHERE email = ? AND password = ?";
+  db.query(sql, [email, password], (err, result) => {
+    if (err) return res.status(500).send(err);
+    if (result.length > 0) {
+      // User found, send success
+      res.json({ success: true });
+    } else {
+      // User not found, send error
+      res.json({ success: false });
+    }
+  });
+});
+
 // Start server
 app.listen(3000, () => {
   console.log("Server running on http://localhost:3000");

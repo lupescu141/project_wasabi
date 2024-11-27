@@ -3,13 +3,20 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Home</title>
-    <link rel="stylesheet" href="test.css" />
-    <script src="test.js" defer></script>
-  </head>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
 
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>About Us</title>
+    <link rel="stylesheet" href="../Jesper/test.css" />
+  </head>
   <body>
+    <!-- Navbar section -->
     <header class="normal_nav">
       <nav>
         <ul class="nav_buttons">
@@ -32,9 +39,29 @@
         </ul>
         <ul class="nav_buttons">
           <li><i id="login_icon" class="fa-solid fa-user"></i></li>
+          <div id="dropdown_menu" class="dropdown-content">
+            <a href="#" id="profile_option">Profile</a>
+            <a href="#" id="login_register_option">Login/Register</a>
+          </div>
         </ul>
       </nav>
     </header>
+
+    <!-- Modal for login/register -->
+    <div id="login_modal" class="loginmodal">
+      <div class="loginmodal-content">
+        <div class="loginmodal-header">
+          <h2>Log In</h2>
+        </div>
+        <div class="loginmodal-body">
+          <input type="email" id="loginemail" placeholder="Email" />
+          <input type="password" id="loginpassword" placeholder="Password" />
+          <button id="login_button">Login</button>
+          <p id="loginerror_message" style="color:red; display:none;">Incorrect Email or Password</p>
+          <a href="../html/registerprofile.html">Register</a>
+        </div>
+      </div>
+    </div>
 
     <header class="mobile_nav">
       <mobileNav>
@@ -46,8 +73,6 @@
           <li><a href="about.html">About</a></li>
         </ul>
         <div class="menu-icon">
-          <a id="lang_button" href="">En</a>
-          <i id="login_icon" class="fa-solid fa-user"></i>
           <i class="fa-solid fa-bars" onclick="toggleMenu()"></i>
         </div>
       </mobileNav>
@@ -70,149 +95,38 @@
       ></script>
     </header>
 
-    <main class="menu-carousel">
-      <div class="carousel-card">
-        <button class="nav-button" id="prev-button">&#10094;</button>
-        <div class="carousel-wrapper">
-          <div class="menu-day" id="monday">
-            <h2>Monday (Date)</h2>
-            <h3>Carbohydrates</h3>
-            <ul class="day-menu-list">
-              <li>Product <span class="allergen">Allergens</span></li>
-              <li>Product <span class="allergen">Allergens</span></li>
-            </ul>
-            <h3>Main Courses</h3>
-            <ul class="day-menu-list">
-              <li>Product <span class="allergen">Allergens</span></li>
-              <li>Product <span class="allergen">Allergens</span></li>
-            </ul>
-            <h3>Soups</h3>
-            <ul class="day-menu-list">
-              <li>Product <span class="allergen">Allergens</span></li>
-              <li>Product <span class="allergen">Allergens</span></li>
-            </ul>
-          </div>
-    
-          <!-- Repeat for each day -->
-          <div class="menu-day" id="tuesday">
-            <h2>Tuesday (Date)</h2>
-            <h3>Carbohydrates</h3>
-            <ul class="day-menu-list">
-              <li>Product <span class="allergen">Allergens</span></li>
-              <li>Product <span class="allergen">Allergens</span></li>
-            </ul>
-            <h3>Main Courses</h3>
-            <ul class="day-menu-list">
-              <li>Product <span class="allergen">Allergens</span></li>
-              <li>Product <span class="allergen">Allergens</span></li>
-            </ul>
-            <h3>Soups</h3>
-            <ul class="day-menu-list">
-              <li>Product <span class="allergen">Allergens</span></li>
-              <li>Product <span class="allergen">Allergens</span></li>
-            </ul>
-          </div>
-          <div class="menu-day" id="wednesday">
-            <h2>Wednesday (Date)</h2>
-            <h3>Carbohydrates</h3>
-            <ul class="day-menu-list">
-              <li>Product <span class="allergen">Allergens</span></li>
-              <li>Product <span class="allergen">Allergens</span></li>
-            </ul>
-            <h3>Main Courses</h3>
-            <ul class="day-menu-list">
-              <li>Product <span class="allergen">Allergens</span></li>
-              <li>Product <span class="allergen">Allergens</span></li>
-            </ul>
-            <h3>Soups</h3>
-            <ul class="day-menu-list">
-              <li>Product <span class="allergen">Allergens</span></li>
-              <li>Product <span class="allergen">Allergens</span></li>
-            </ul>
-          </div>
-          
-          <div class="menu-day" id="thursday">
-            <h2>Thursday (Date)</h2>
-            <h3>Carbohydrates</h3>
-            <ul class="day-menu-list">
-              <li>Product <span class="allergen">Allergens</span></li>
-              <li>Product <span class="allergen">Allergens</span></li>
-            </ul>
-            <h3>Main Courses</h3>
-            <ul class="day-menu-list">
-              <li>Product <span class="allergen">Allergens</span></li>
-              <li>Product <span class="allergen">Allergens</span></li>
-            </ul>
-            <h3>Soups</h3>
-            <ul class="day-menu-list">
-              <li>Product <span class="allergen">Allergens</span></li>
-              <li>Product <span class="allergen">Allergens</span></li>
-            </ul>
-          </div>
-          
-          <div class="menu-day" id="friday">
-            <h2>Friday (Date)</h2>
-            <h3>Carbohydrates</h3>
-            <ul class="day-menu-list">
-              <li>Product <span class="allergen">Allergens</span></li>
-              <li>Product <span class="allergen">Allergens</span></li>
-            </ul>
-            <h3>Main Courses</h3>
-            <ul class="day-menu-list">
-              <li>Product <span class="allergen">Allergens</span></li>
-              <li>Product <span class="allergen">Allergens</span></li>
-            </ul>
-            <h3>Soups</h3>
-            <ul class="day-menu-list">
-              <li>Product <span class="allergen">Allergens</span></li>
-              <li>Product <span class="allergen">Allergens</span></li>
-            </ul>
-          </div>
-          
-          <div class="menu-day" id="saturday">
-            <h2>Saturday (Date)</h2>
-            <h3>Carbohydrates</h3>
-            <ul class="day-menu-list">
-              <li>Product <span class="allergen">Allergens</span></li>
-              <li>Product <span class="allergen">Allergens</span></li>
-            </ul>
-            <h3>Main Courses</h3>
-            <ul class="day-menu-list">
-              <li>Product <span class="allergen">Allergens</span></li>
-              <li>Product <span class="allergen">Allergens</span></li>
-            </ul>
-            <h3>Soups</h3>
-            <ul class="day-menu-list">
-              <li>Product <span class="allergen">Allergens</span></li>
-              <li>Product <span class="allergen">Allergens</span></li>
-            </ul>
-          </div>
-          
-          <div class="menu-day" id="sunday">
-            <h2>Sunday (Date)</h2>
-            <h3>Carbohydrates</h3>
-            <ul class="day-menu-list">
-              <li>Product <span class="allergen">Allergens</span></li>
-              <li>Product <span class="allergen">Allergens</span></li>
-            </ul>
-            <h3>Main Courses</h3>
-            <ul class="day-menu-list">
-              <li>Product <span class="allergen">Allergens</span></li>
-              <li>Product <span class="allergen">Allergens</span></li>
-            </ul>
-            <h3>Soups</h3>
-            <ul class="day-menu-list">
-              <li>Product <span class="allergen">Allergens</span></li>
-              <li>Product <span class="allergen">Allergens</span></li>
-            </ul>
-          </div>
-          
-        </div>
-        <button class="nav-button" id="next-button">&#10095;</button>
-      </div>
-    </main>
-    
-    <script src="test.js"></script>
+    <div id="header">
+      <h1>About Us</h1>
+    </div>
+
+    <div id="sub-header">
+      <h2>Who We Are</h2>
+    </div>
+
+    <div id="text-section">
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
+        vestibulum, lorem ac sollicitudin tempus, nulla nisi sodales lorem, nec
+        vulputate purus leo a metus. Sed euismod turpis sit amet dui tempor
+        tristique. Curabitur id dolor at elit interdum tincidunt. In nec
+        pharetra magna. Etiam posuere magna in tellus bibendum, ac ultrices eros
+        placerat. Aenean id pharetra nisl. Praesent viverra lacus nec velit
+        dictum, sed porttitor tortor vestibulum.
+      </p>
+      <p>
+        Aliquam erat volutpat. Sed consectetur lorem vel tempor elementum.
+        Pellentesque habitant morbi tristique senectus et netus et malesuada
+        fames ac turpis egestas. Nullam tincidunt velit neque, id finibus quam
+        vehicula ac. Curabitur eget fringilla dolor. Suspendisse potenti. Etiam
+        volutpat vel purus a volutpat. Phasellus vel orci nulla.
+      </p>
+    </div>
+
+    <!-- Image section -->
+    <div id="image-section">
+      <img src="about-us-image.jpg" alt="About Us Image" />
+    </div>
+
 
     <header class="bottom_nav">
       <nav>
@@ -232,15 +146,18 @@
             />
           </li>
           <li>
-            <img
-              src="/images/google-maps.png"
-              alt="google maps icon"
-              class="google_maps"
-            />
+            <a
+              href="https://www.google.fi/maps/dir//Itis,+It%C3%A4katu+1-7,+00930+Helsinki/@60.2083,24.9194,13z/data=!4m9!4m8!1m0!1m5!1m1!1s0x46920f2bf0665295:0x836e4970c52d81ae!2m2!1d25.0805003!2d60.2107881!3e3?entry=ttu&g_ep=EgoyMDI0MTEwNS4wIKXMDSoASAFQAw%3D%3D"
+              target="_blank"
+              ><img
+                src="/images/google-maps.png"
+                alt="google maps icon"
+                class="google_maps"
+            /></a>
           </li>
           <li>
             <a
-              href="https://reittiopas.hsl.fi/reitti/Ilmalantori%204%2C%20Helsinki%3A%3A60.2083%2C24.9194/It%C3%A4keskus%2C%20Puotinharju%2C%20Helsinki%3A%3A60.209856%2C25.07329?arriveBy=false&locale=fi&time=1731072106.361"
+              href="https://reittiopas.hsl.fi/reitti/sy%C3%B6t%C3%A4%20l%C3%A4ht%C3%B6paikka/It%C3%A4keskus%2C%20Puotinharju%2C%20Helsinki%3A%3A60.209856%2C25.07329?arriveBy=false&locale=fi&time=1731072844.445"
               target="_blank"
               ><img src="/images/hsl-icon.png" alt="hsl icon" class="hsl_icon"
             /></a>
@@ -248,5 +165,6 @@
         </ul>
       </nav>
     </header>
+    <script src="../js/loginmodal.js"></script>
   </body>
 </html>
