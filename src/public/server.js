@@ -9,10 +9,10 @@ app.use(cors());
 
 // Database connection
 const db = mysql.createConnection({
-  host: "",
-  user: "",
-  password: "", // mySQL password
-  database: "", // database name
+  host: "", // your database host
+  user: "", // your database username
+  password: "", // your database password
+  database: "", // your database name
 });
 
 db.connect((err) => {
@@ -51,11 +51,10 @@ app.post("/api/users", (req, res) => {
 });
 
 // Register a new user
-app.post("/api/users", (req, res) => {
+app.post("/api/users/register", (req, res) => {
   const { name, surname, email, phone, password } = req.body;
   const sql =
     "INSERT INTO users (name, surname, email, phone, password) VALUES (?, ?, ?, ?, ?)";
-
   db.query(sql, [name, surname, email, phone, password], (err, result) => {
     if (err) return res.status(500).send(err);
     res.json({ message: "User registered successfully." });
@@ -65,10 +64,61 @@ app.post("/api/users", (req, res) => {
 // Fetch employee contact information
 app.get("/api/employees", (req, res) => {
   const sql = "SELECT name, title, email, phone FROM employees";
-
   db.query(sql, (err, results) => {
     if (err) return res.status(500).send(err);
     res.json(results);
+  });
+});
+
+// Fetch all orders
+app.get("/api/orders", (req, res) => {
+  const sql = `
+    SELECT 
+      orders.id AS number,
+      orders.time,
+      orders.status AS progress,
+      GROUP_CONCAT(products.name SEPARATOR ', ') AS products,
+      SUM(order_products.quantity * products.price) AS total_price
+    FROM 
+      orders
+    JOIN 
+      order_products ON orders.id = order_products.order_id
+    JOIN 
+      products ON order_products.product_id = products.id
+    GROUP BY 
+      orders.id;
+  `;
+  db.query(sql, (err, results) => {
+    if (err) return res.status(500).send(err);
+    res.json(results);
+  });
+});
+
+// Update order details
+app.put("/api/orders/:id", (req, res) => {
+  const orderId = req.params.id;
+  const { progress } = req.body;
+
+  const sql = "UPDATE orders SET status = ? WHERE id = ?";
+  db.query(sql, [progress, orderId], (err, result) => {
+    if (err) return res.status(500).send(err);
+    res.json({ message: "Order updated successfully." });
+  });
+});
+
+// Endpoint to verify user login
+app.post("/api/users/login", (req, res) => {
+  const { email, password } = req.body;
+  const sql = "SELECT * FROM users WHERE email = ? AND password = ?";
+  db.query(sql, [email, password], (err, result) => {
+    if (err) return res.status(500).send(err);
+    if (result.length > 0) {
+      // User found, send success
+      res.json({ success: true });
+    } else {
+      // User not found, send error
+      res.json({ success: false });
+    }
   });
 });
 

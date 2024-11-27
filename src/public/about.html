@@ -39,9 +39,29 @@
         </ul>
         <ul class="nav_buttons">
           <li><i id="login_icon" class="fa-solid fa-user"></i></li>
+          <div id="dropdown_menu" class="dropdown-content">
+            <a href="#" id="profile_option">Profile</a>
+            <a href="#" id="login_register_option">Login/Register</a>
+          </div>
         </ul>
       </nav>
     </header>
+
+    <!-- Modal for login/register -->
+    <div id="login_modal" class="loginmodal">
+      <div class="loginmodal-content">
+        <div class="loginmodal-header">
+          <h2>Log In</h2>
+        </div>
+        <div class="loginmodal-body">
+          <input type="email" id="loginemail" placeholder="Email" />
+          <input type="password" id="loginpassword" placeholder="Password" />
+          <button id="login_button">Login</button>
+          <p id="loginerror_message" style="color:red; display:none;">Incorrect Email or Password</p>
+          <a href="../html/registerprofile.html">Register</a>
+        </div>
+      </div>
+    </div>
 
     <header class="mobile_nav">
       <mobileNav>
@@ -138,5 +158,6 @@
         </ul>
       </nav>
     </header>
+    <script src="../public/loginmodal.js"></script>
   </body>
 </html>
