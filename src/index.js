@@ -8,10 +8,23 @@ import {
 
 import express from "express";
 const app = express();
+//folder pathing settings
 import path from "path";
 import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+//crypting
+import bcrypt from "bcryptjs";
+import { cryptPassword } from "./crypting.js";
+//body parser
+import bodyParser from "body-parser";
+app.use(bodyParser.json()); // to support JSON-encoded bodies
+app.use(
+  bodyParser.urlencoded({
+    // to support URL-encoded bodies
+    extended: true,
+  })
+);
 
 //Port for page.
 const port = process.env.PORT || 3000;
@@ -29,6 +42,7 @@ const pagelist = [
   { path: "/ordermanagement", file: "/ordermanagement.html" },
   { path: "/employeecontacts", file: "/employeecontacts.html" },
   { path: "/about", file: "/about.html" },
+  { path: "/register", file: "/registerprofile.html" },
 ];
 
 pagelist.forEach((element) => {
@@ -37,7 +51,7 @@ pagelist.forEach((element) => {
   });
 });
 
-app.get("/user", async (req, res) => {
+app.get("api/get/user", async (req, res) => {
   const query = req.query;
   const result = await get_userdata(query.email);
   console.log(result);
@@ -46,4 +60,52 @@ app.get("/user", async (req, res) => {
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`);
+});
+
+// Registration
+app.post("/api/users/register", async (req, res) => {
+  const { name, surname, email, phone, password, confirmPassword } = req.body;
+  const db_user = await get_userdata(email);
+
+  try {
+    if (email == db_user.email) {
+      return res
+        .status(400)
+        .json({ message: "User already exists with current email!" });
+    }
+
+    const cryptedPassword = await cryptPassword(password);
+
+    await pool.query(
+      `INSERT INTO wasabi.users VALUES ('${email}', '${name}', '${surname}', '${cryptedPassword}', '${phone}')`
+    );
+
+    res.status(201).json({ message: "User registered successfully!" });
+  } catch (error) {
+    console.error("Error registering user:", error);
+    res.status(500).json({ message: "Internal server error." });
+  }
+});
+
+// Login
+app.post("/api/users/login", async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    // Verify login
+    const user = pool.find((user) => user.email === email);
+    if (!user) {
+      return res.status(400).json({ message: "Invalid email or password." });
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(400).json({ message: "Invalid email or password." });
+    }
+
+    res.status(200).json({ message: "Login successful!" });
+  } catch (error) {
+    console.error("Error logging in:", error);
+    res.status(500).json({ message: "Internal server error." });
+  }
 });
