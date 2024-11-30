@@ -1,7 +1,17 @@
-const express = require("express");
+import {
+  pool,
+  get_all_from_table,
+  get_row_from_table,
+  get_buffet_weekday,
+  get_userdata,
+} from "./database.js";
+
+import express from "express";
 const app = express();
-const { dirname } = require("path");
-const path = require("path");
+import path from "path";
+import { fileURLToPath } from "url";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 //Port for page.
 const port = process.env.PORT || 3000;
@@ -22,9 +32,16 @@ const pagelist = [
 ];
 
 pagelist.forEach((element) => {
-  app.get(element.path, function (req, res) {
+  app.get(element.path, (req, res) => {
     res.sendFile(path.join(__dirname, `/public${element.file}`));
   });
+});
+
+app.get("/user", async (req, res) => {
+  const query = req.query;
+  const result = await get_userdata(query.email);
+  console.log(result);
+  res.send(result);
 });
 
 app.listen(port, () => {
