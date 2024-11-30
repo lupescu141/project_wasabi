@@ -1,55 +1,48 @@
-// Crypt password function
-async function cryptPassword(password) {
-  const salt = await bcrypt.genSalt(10);
-  return await bcrypt.hash(password, salt);
+const bcrypt = require("bcryptjs");
+
+// Function to crypt a password
+async function cryptPassword(Password) {
+  try {
+    const salt = await bcrypt.genSalt(10); // Generate a salt with 10 rounds
+    const cryptedPassword = await bcrypt.hash(Password, salt); // Crypt the password
+    return cryptedPassword;
+  } catch (error) {
+    console.error("Error crypting password:", error);
+    throw error;
+  }
 }
 
-// pool = DATABASE
+//Example usage
+cryptPassword("Password123")
+  .then((cryptedPassword) => {
+    console.log("Crypted Password: ", cryptedPassword);
+  })
+  .catch((error) => {
+    console.error(error);
+  });
 
-// Registration
-app.post("/api/users/register", async (req, res) => {
-  const { name, surname, email, phone, password, confirmPassword } = req.body;
-
+// TEST IF PASSWORD HAS BEEN CYPTED CORRECTLY:
+async function verifyPassword(Password, cryptedPassword) {
   try {
-    if (password !== confirmPassword) {
-      return res.status(400).json({ message: "Passwords do not match!" });
-    }
-
-    const cryptedPassword = await cryptPassword(password);
-    pool.push({
-      name,
-      surname,
-      email,
-      phone,
-      password: cryptedPassword,
-    });
-
-    res.status(201).json({ message: "User registered successfully!" });
+    const isMatch = await bcrypt.compare(Password, cryptedPassword);
+    return isMatch;
   } catch (error) {
-    console.error("Error registering user:", error);
-    res.status(500).json({ message: "Internal server error." });
+    console.error("Error verifying password:", error);
+    throw error;
   }
-});
+}
 
-// Login
-app.post("/api/users/login", async (req, res) => {
-  const { email, password } = req.body;
-
-  try {
-    // Verify login
-    const user = pool.find((user) => user.email === email);
-    if (!user) {
-      return res.status(400).json({ message: "Invalid email or password." });
+// Get storedCryptedPassword from database. Compare to user's password input in loginmodal
+const storedCryptedPassword =
+  "$2a$10$XK1GxFxjGriM1nOZZYjPNeM/NNmdH6iVxhqNGr06qI6CZuhTC7b3O";
+verifyPassword("Password123", storedCryptedPassword)
+  .then((isMatch) => {
+    if (isMatch) {
+      console.log("Password is correct!");
+    } else {
+      console.log("Password is incorrect.");
     }
-
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
-      return res.status(400).json({ message: "Invalid email or password." });
-    }
-
-    res.status(200).json({ message: "Login successful!" });
-  } catch (error) {
-    console.error("Error logging in:", error);
-    res.status(500).json({ message: "Internal server error." });
-  }
-});
+  })
+  .catch((error) => {
+    console.error(error);
+  });
