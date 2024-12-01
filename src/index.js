@@ -16,6 +16,8 @@ const __dirname = path.dirname(__filename);
 //crypting
 import bcrypt from "bcryptjs";
 import { cryptPassword } from "./crypting.js";
+//universally unique identifiers
+import { v4 as uuidv4 } from "uuid";
 //body parser
 import bodyParser from "body-parser";
 app.use(bodyParser.json()); // to support JSON-encoded bodies
@@ -90,20 +92,27 @@ app.post("/api/users/register", async (req, res) => {
 });
 
 // Login
+const sessions = {};
+
 app.post("/api/users/login", async (req, res) => {
   const { email, password } = req.body;
+  const db_user = await get_userdata(email, password);
 
   try {
     // Verify login
-    const user = pool.find((user) => user.email === email);
-    if (!user) {
-      return res.status(400).json({ message: "Invalid email or password." });
+    const PasswordisMatch = await bcrypt.compare(password, db_user.password);
+
+    if (email != db_user.email || !PasswordisMatch) {
+      return res.status(400).json({ message: "Invalid email or password" });
     }
 
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) {
-      return res.status(400).json({ message: "Invalid email or password." });
-    }
+    const sessionid = uuidv4();
+
+    await pool.query(`GET id FROM wasabi.users WHERE email = '${email}'`);
+
+    sessions[sessionid] = { email, id };
+    res.set("Set-Cookie", `session=${sessionid}`);
+    res.send("success");
 
     res.status(200).json({ message: "Login successful!" });
   } catch (error) {
