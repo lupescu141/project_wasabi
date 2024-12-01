@@ -17,7 +17,7 @@
   </head>
   <form id="profile-form" action="api/users/register" method="post">
     <div class="form-group">
-      <label for="name">Name:</label>
+      <label for="name">Nimi:</label>
         <input
           type="text"
           id="name"
@@ -27,7 +27,7 @@
         />
     </div>
       <div class="form-group">
-        <label for="surname">Surname:</label>
+        <label for="surname">Sukunimi:</label>
         <input
           type="text"
           id="surname"
@@ -37,7 +37,7 @@
         />
       </div>
       <div class="form-group">
-        <label for="email">Email:</label>
+        <label for="email">Sähköposti:</label>
         <input
           type="email"
           id="email"
@@ -47,7 +47,7 @@
         />
       </div>
       <div class="form-group">
-        <label for="phone">Phone Number:</label>
+        <label for="phone">Puhelinnumero:</label>
         <input
           type="tel"
           id="phone"
@@ -57,19 +57,81 @@
         />
       </div>
       <div class="form-group">
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required />
+        <label for="password">Salasana:</label>
+        <input type="password" id="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}" placeholder="Syötä Salasana" required minlength="8" maxlength="15" required/>
       </div>
       <div class="form-group">
-        <label for="confirm-password">Confirm Password:</label>
-        <input
-          type="password"
-          id="confirm-password"
-          name="confirm-password"
-          required
-        />
+        <label for="confirm-password">Kirjoita salasana uudelleen:</label>
+        <input type="password" id="confirmPassword"  name="salasanaCheck" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,15}" placeholder="Syötä Salasana Uudelleen" required minlength="8" maxlength="15"/>
+      </div>
+      <div id="message">
+        <h3>Password must contain the following:</h3>
+        <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
+        <p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
+        <p id="number" class="invalid">A <b>number</b></p>
+        <p id="length" class="invalid">Minimum <b>8 characters</b></p>
       </div>
       <button type="submit">Register</button>
     </form>
+    
+    <script>
+      var myInput = document.getElementById("password");
+      var letter = document.getElementById("letter");
+      var capital = document.getElementById("capital");
+      var number = document.getElementById("number");
+      var length = document.getElementById("length");
+      
+      // When the user clicks on the password field, show the message box
+      myInput.onfocus = function() {
+        document.getElementById("message").style.display = "block";
+      }
+      
+      // When the user clicks outside of the password field, hide the message box
+      myInput.onblur = function() {
+        document.getElementById("message").style.display = "none";
+      }
+      
+      // When the user starts to type something inside the password field
+      myInput.onkeyup = function() {
+        // Validate lowercase letters
+        var lowerCaseLetters = /[a-z]/g;
+        if(myInput.value.match(lowerCaseLetters)) {
+          letter.classList.remove("invalid");
+          letter.classList.add("valid");
+        } else {
+          letter.classList.remove("valid");
+          letter.classList.add("invalid");
+      }
+      
+        // Validate capital letters
+        var upperCaseLetters = /[A-Z]/g;
+        if(myInput.value.match(upperCaseLetters)) {
+          capital.classList.remove("invalid");
+          capital.classList.add("valid");
+        } else {
+          capital.classList.remove("valid");
+          capital.classList.add("invalid");
+        }
+      
+        // Validate numbers
+        var numbers = /[0-9]/g;
+        if(myInput.value.match(numbers)) {
+          number.classList.remove("invalid");
+          number.classList.add("valid");
+        } else {
+          number.classList.remove("valid");
+          number.classList.add("invalid");
+        }
+      
+        // Validate length
+        if(myInput.value.length >= 8) {
+          length.classList.remove("invalid");
+          length.classList.add("valid");
+        } else {
+          length.classList.remove("valid");
+          length.classList.add("invalid");
+        }
+      }
+      </script>
   </body>
 </html>

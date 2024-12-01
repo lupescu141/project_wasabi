@@ -68,16 +68,18 @@ app.post("/api/users/register", async (req, res) => {
   const db_user = await get_userdata(email);
 
   try {
-    if (email == db_user.email) {
+    if (email == db_user[0][0].email) {
       return res
         .status(400)
         .json({ message: "User already exists with current email!" });
     }
+  } catch (err) {}
 
+  try {
     const cryptedPassword = await cryptPassword(password);
 
     await pool.query(
-      `INSERT INTO wasabi.users VALUES ('${email}', '${name}', '${surname}', '${cryptedPassword}', '${phone}')`
+      `INSERT INTO wasabi.users (email, name, surname, password, phonenumber) VALUES ('${email}', '${name}', '${surname}', '${cryptedPassword}', '${phone}')`
     );
 
     res.status(201).json({ message: "User registered successfully!" });
