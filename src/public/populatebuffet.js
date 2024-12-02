@@ -35,7 +35,7 @@ const populateMenu = async (weekday) => {
 };
 
 // Populate all days of the week
-const populateBuffetForWeek = () => {
+const populateBuffetForWeek = async () => {
   const daysOfWeek = [
     "monday",
     "tuesday",
@@ -46,8 +46,8 @@ const populateBuffetForWeek = () => {
     "sunday",
   ];
 
-  daysOfWeek.forEach((day) => {
-    populateMenu(day); // Populate each day of the week
+  daysOfWeek.forEach(async (day) => {
+    await populateMenu(day); // Populate each day of the week
   });
 };
 

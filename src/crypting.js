@@ -6,6 +6,4 @@ async function cryptPassword(password) {
   return await bcrypt.hash(password, salt);
 }
 
-// pool = DATABASE
-
 export { cryptPassword };
