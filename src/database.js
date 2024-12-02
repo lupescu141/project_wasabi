@@ -44,7 +44,7 @@ const get_userdata = async (user_email) => {
     return result;
   } catch (err) {
     console.log(err);
-    return err;
+    return "service offline";
   }
 };
 
