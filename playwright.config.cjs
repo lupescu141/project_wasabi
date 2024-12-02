@@ -27,5 +27,5 @@ module.exports = defineConfig({
       use: { browserName: "webkit", viewport: { width: 375, height: 667 } },
     },
   ],
-  testDir: "./tests",
+  testDir: "./tests-examples",
 });

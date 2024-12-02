@@ -41,7 +41,7 @@
         <ul class="nav_buttons">
           <li><i id="login_icon" class="fa-solid fa-user"></i></li>
           <div id="dropdown_menu" class="dropdown-content">
-            <a href="#" id="profile_option">Profile</a>
+            <a href="profile" id="profile_option">Profile</a>
             <a href="#" id="login_register_option">Login/Register</a>
           </div>
         </ul>
@@ -56,17 +56,29 @@
         </div>
         <div class="loginmodal-body">
           <form id="login_form" action="api/users/login" method="post">
-            <input type="email" id="loginemail"   placeholder="Email" name="email" required />
-            <input type="password" id="loginpassword" placeholder="Password" name="password" required />
+            <input
+              type="email"
+              id="loginemail"
+              placeholder="Email"
+              name="email"
+              required
+            />
+            <input
+              type="password"
+              id="loginpassword"
+              placeholder="Password"
+              name="password"
+              required
+            />
             <button type="submit" id="login_button">Login</button>
           </form>
           <p id="loginerror_message" style="color: red; display: none">
             Incorrect Email or Password
           </p>
-          <a href="registerprofile.html">Register</a>
+          <a href="register">Register</a>
         </div>
       </div>
-    </div>    
+    </div>
     <header class="mobile_nav">
       <mobileNav>
         <img class="mobile_logo" src="logo1.png" alt="logo" />
