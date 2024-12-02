@@ -170,3 +170,14 @@ app.post("/api/users/login", async (req, res) => {
     console.log(err);
   }
 });
+
+app.get("/api/weekly_buffet", async (req, res) => {
+  const { type, weekday } = req.query;
+
+  try {
+    const [rows] = await get_buffet_item(type, weekday);
+    res.status(200).json(rows);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch buffet items." });
+  }
+});

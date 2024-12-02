@@ -61,10 +61,24 @@ const get_buffet_weekday = async (weekday) => {
   }
 };
 
+const get_buffet_item = async (type, weekday) => {
+  try {
+    const result = await pool.query(
+      `SELECT product_name, weekday, product_description, type, product_allergens FROM wasabi.weekly_buffet WHERE type = '${type}' AND weekday = '${weekday}' `
+    );
+    console.log(result);
+    return result;
+  } catch (err) {
+    console.log(err);
+    return err;
+  }
+};
+
 export {
   pool,
   get_all_from_table,
   get_row_from_table,
   get_buffet_weekday,
   get_userdata,
+  get_buffet_item,
 };
