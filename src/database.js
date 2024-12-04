@@ -100,6 +100,19 @@ const get_menu = async (categorie) => {
   }
 };
 
+const get_admindata = async (admin_email) => {
+  try {
+    const result = await pool.query(
+      `SELECT * FROM wasabi.workers WHERE email = '${admin_email}'`
+    );
+    console.log(result);
+    return result;
+  } catch (err) {
+    console.log(err);
+    return "service offline";
+  }
+};
+
 export {
   pool,
   get_all_from_table,
@@ -109,4 +122,5 @@ export {
   get_buffet_item,
   get_buffet_item_next_week,
   get_menu,
+  get_admindata,
 };

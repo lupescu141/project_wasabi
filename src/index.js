@@ -7,6 +7,7 @@ import {
   get_buffet_item,
   get_buffet_item_next_week,
   get_menu,
+  get_admindata,
 } from "./database.js";
 import dotenv from "dotenv";
 dotenv.config();
@@ -180,7 +181,7 @@ app.post("/api/weekly_buffet", async (req, res) => {
   try {
     const [rows] = await get_buffet_item(type, weekday);
     console.log(rows);
-    return res.json(rows);
+    return res.status(200).json(rows);
   } catch (error) {
     return res.status(500).json({ error: "Failed to fetch buffet items." });
   }
@@ -207,5 +208,32 @@ app.post("/api/menu", async (req, res) => {
     return res.json(rows);
   } catch (error) {
     return res.status(500).json({ error: "Failed to fetch buffet items." });
+  }
+});
+
+app.post("/api/admin/login", async (req, res) => {
+  const { email, password } = req.body;
+  const db_user = await get_admindata(email);
+
+  //Verify email
+  try {
+    if (db_user[0][0]?.email !== email) {
+      return res
+        .status(400)
+        .json({ message: "User with email does not exist!" });
+    }
+    // Verify login
+    if ((await bcrypt.compare(password, db_user[0][0].password)) == false) {
+      return res.status(400).json({ message: "Incorrect password!" });
+    }
+
+    //const sessionid = uuidv4();
+    const user_id = db_user[0][0].id;
+    req.session.userinfo = user_id;
+    //sessions[sessionid] = { email, user_id };
+    //res.set("Set-Cookie", `session=${sessionid}`);
+    return res.status(200).json({ message: "Login successful!" });
+  } catch (err) {
+    console.log(err);
   }
 });
