@@ -74,6 +74,8 @@ const get_buffet_item = async (type, weekday) => {
   }
 };
 
+get_buffet_item("carbohydrate", "monday");
+
 export {
   pool,
   get_all_from_table,
