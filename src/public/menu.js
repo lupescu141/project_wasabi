@@ -32,6 +32,7 @@ const fetch_menu_items = async (categorie) => {
 
 const create_menu_lists = async () => {
   const mainCourseList = document.getElementById("main_course");
+  const drinksList = document.getElementById("drinks_list");
   const maincourse_data = await fetch_menu_items("maincourse");
   mainCourseList.innerHTML = "";
 
@@ -49,7 +50,6 @@ const create_menu_lists = async () => {
     );
   });
 
-  const drinksList = document.getElementById("drinks_list");
   const drinks_data = await fetch_menu_items("drink");
   drinksList.innerHTML = "";
   drinks_data.forEach((element) => {
