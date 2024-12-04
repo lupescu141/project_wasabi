@@ -15,6 +15,7 @@
     <title>Restaurant Menu</title>
     <link rel="stylesheet" href="style.css" />
     <script src="loginmodal.js" defer></script>
+    <script src="menu.js" defer></script>
   </head>
   <body>
     <header class="normal_nav">
@@ -101,69 +102,29 @@
       <h1>Menu</h1>
     </div>
 
-    <ul class="product-list">
-      <li class="product-item">
-        <img src="Product1.png" class="product-image" />
-        <div class="product-details">
-          <h3 class="product-name">Product1</h3>
-          <p class="product-description">Description</p>
-          <p class="product-allergens">Allergens</p>
-          <p class="product-price">Price</p>
-        </div>
-      </li>
-
-      <li class="product-item">
-        <img src="Product2.png" class="product-image" />
-        <div class="product-details">
-          <h3 class="product-name">Product2</h3>
-          <p class="product-description">Description</p>
-          <p class="product-allergens">Allergens</p>
-          <p class="product-price">Price</p>
-        </div>
-      </li>
-
-      <li class="product-item">
-        <img src="Product3.png" class="product-image" />
-        <div class="product-details">
-          <h3 class="product-name">Product3</h3>
-          <p class="product-description">Description</p>
-          <p class="product-allergens">Allergens</p>
-          <p class="product-price">Price</p>
-        </div>
-      </li>
-
-      <li class="product-item">
-        <img src="Product4.png" class="product-image" />
-        <div class="product-details">
-          <h3 class="product-name">Product4</h3>
-          <p class="product-description">Description</p>
-          <p class="product-allergens">Allergens</p>
-          <p class="product-price">Price</p>
-        </div>
-      </li>
-
-      <li class="product-item">
-        <img src="Product5.png" class="product-image" />
-        <div class="product-details">
-          <h3 class="product-name">Product5</h3>
-          <p class="product-description">Description</p>
-          <p class="product-allergens">Allergens</p>
-          <p class="product-price">Price</p>
-        </div>
-      </li>
-
-      <li class="product-item">
-        <img src="Product6.png" class="product-image" />
-        <div class="product-details">
-          <h3 class="product-name">Product6</h3>
-          <p class="product-description">Description</p>
-          <p class="product-allergens">Allergens</p>
-          <p class="product-price">Price</p>
-        </div>
-      </li>
-    </ul>
-
-    <script src="index.js"></script>
+    <div class="product-list" id="product-list">
+      <ul id="main_course">
+        <li class="product-item">
+          <img src="Product1.png" class="product-image" />
+          <div class="product-details">
+            <h3 class="product-name">Product1</h3>
+            <p class="product-description">Description</p>
+            <p class="product-allergens">Allergens</p>
+            <p class="product-price">Price</p>
+          </div>
+        </li>
+        <ul id="drinks_list">
+          <li class="product-item">
+            <img src="Product1.png" class="product-image" />
+            <div class="product-details">
+              <h3 class="product-name">Product1</h3>
+              <p class="product-description">Description</p>
+              <p class="product-allergens">Allergens</p>
+              <p class="product-price">Price</p>
+            </div>
+          </li>
+      </ul>
+    </div>
 
     <header class="bottom_nav">
       <nav>

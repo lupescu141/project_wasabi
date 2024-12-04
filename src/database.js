@@ -66,7 +66,7 @@ const get_buffet_item = async (type, weekday) => {
     const result = await pool.query(
       `SELECT product_name, weekday, product_description, type, product_allergens FROM wasabi.weekly_buffet WHERE type = '${type}' AND weekday = '${weekday}' `
     );
-    console.log(result);
+    //console.log(result);
     return result;
   } catch (err) {
     console.log(err);
@@ -74,7 +74,31 @@ const get_buffet_item = async (type, weekday) => {
   }
 };
 
-get_buffet_item("carbohydrate", "monday");
+const get_buffet_item_next_week = async (type, weekday) => {
+  try {
+    const result = await pool.query(
+      `SELECT product_name, weekday, product_description, type, product_allergens FROM wasabi.weekly_buffet_next_week WHERE type = '${type}' AND weekday = '${weekday}' `
+    );
+    //console.log(result);
+    return result;
+  } catch (err) {
+    console.log(err);
+    return err;
+  }
+};
+
+const get_menu = async (categorie) => {
+  try {
+    const result = await pool.query(
+      `SELECT * FROM wasabi.products WHERE categorie = '${categorie}'`
+    );
+    //console.log(result);
+    return result;
+  } catch (err) {
+    console.log(err);
+    return err;
+  }
+};
 
 export {
   pool,
@@ -83,4 +107,6 @@ export {
   get_buffet_weekday,
   get_userdata,
   get_buffet_item,
+  get_buffet_item_next_week,
+  get_menu,
 };

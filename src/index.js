@@ -4,6 +4,9 @@ import {
   get_row_from_table,
   get_buffet_weekday,
   get_userdata,
+  get_buffet_item,
+  get_buffet_item_next_week,
+  get_menu,
 } from "./database.js";
 import dotenv from "dotenv";
 dotenv.config();
@@ -171,13 +174,38 @@ app.post("/api/users/login", async (req, res) => {
   }
 });
 
-app.get("/api/weekly_buffet", async (req, res) => {
+app.post("/api/weekly_buffet", async (req, res) => {
   const { type, weekday } = req.query;
-
+  //console.log(type, weekday);
   try {
     const [rows] = await get_buffet_item(type, weekday);
-    res.status(200).json(rows);
+    console.log(rows);
+    return res.json(rows);
   } catch (error) {
-    res.status(500).json({ error: "Failed to fetch buffet items." });
+    return res.status(500).json({ error: "Failed to fetch buffet items." });
+  }
+});
+
+app.post("/api/weekly_buffet_next", async (req, res) => {
+  const { type, weekday } = req.query;
+  //console.log(type, weekday);
+  try {
+    const [rows] = await get_buffet_item_next_week(type, weekday);
+    console.log(rows);
+    return res.json(rows);
+  } catch (error) {
+    return res.status(500).json({ error: "Failed to fetch buffet items." });
+  }
+});
+
+app.post("/api/menu", async (req, res) => {
+  const { categorie } = req.query;
+  //console.log(type, weekday);
+  try {
+    const [rows] = await get_menu(categorie);
+    console.log(rows);
+    return res.json(rows);
+  } catch (error) {
+    return res.status(500).json({ error: "Failed to fetch buffet items." });
   }
 });
