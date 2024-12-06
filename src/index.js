@@ -8,6 +8,7 @@ import {
   get_buffet_item_next_week,
   get_menu,
   get_admindata,
+  get_database_session,
 } from "./database.js";
 import dotenv from "dotenv";
 dotenv.config();
@@ -27,6 +28,13 @@ import { v4 as uuidv4 } from "uuid";
 //cookie perser
 import cookieParser from "cookie-parser";
 app.use(cookieParser(process.env.SECRET));
+
+function getcookie(req) {
+  var cookie = req.headers.cookie;
+  // user=someone; session=mySessionID
+  return cookie.split("; ");
+}
+
 //body parser
 import bodyParser from "body-parser";
 app.use(bodyParser.json()); // to support JSON-encoded bodies
@@ -62,7 +70,7 @@ const sessionStore = new MySQLStore(
 app.use(
   session({
     key: "keyin",
-    secret: "my sercret",
+    secret: process.env.SECRET,
     resave: false,
     store: sessionStore,
     saveUninitialized: true,
@@ -95,8 +103,40 @@ pagelist.forEach((element) => {
 });
 
 app.get("/profile", async (req, res) => {
-  if (req.session.userinfo) {
+  const [[db_session]] = await get_database_session(req.signedCookies["keyin"]);
+  //console.log(db_session.session_id);
+  console.log(JSON.parse(db_session.data).userinfo);
+  //console.log("id:", req.session.userinfo);
+  //console.log(req.signedCookies["keyin"]);
+  console.log(req?.session.userinfo.user_id);
+
+  if (
+    req?.signedCookies["keyin"] == db_session?.session_id &&
+    req?.session.userinfo.user_id ==
+      JSON.parse(db_session?.data)?.userinfo.user_id
+  ) {
     res.sendFile(path.join(__dirname, `/public/editprofile.html`));
+  } else {
+    return res.status(401).send("Invalid session");
+  }
+});
+
+app.get("/management", async (req, res) => {
+  const [[db_session]] = await get_database_session(req.signedCookies["keyin"]);
+  const admindata = get_admindata(req?.session.userinfo.user_email);
+  //console.log(db_session.session_id);
+  //console.log(JSON.parse(db_session.data).userinfo);
+  //console.log("id:", req.session.userinfo);
+  //console.log(req.signedCookies["keyin"]);
+  //console.log(req?.session.userinfo.user_id);
+
+  if (
+    req?.signedCookies["keyin"] == db_session?.session_id &&
+    req?.session.userinfo.user_id ==
+      JSON.parse(db_session?.data)?.userinfo.user_id &&
+    admindata[0][0]?.email == req?.session.userinfo.user_email
+  ) {
+    res.sendFile(path.join(__dirname, `/public/management.html`));
   } else {
     return res.status(401).send("Invalid session");
   }
@@ -166,7 +206,10 @@ app.post("/api/users/login", async (req, res) => {
 
     //const sessionid = uuidv4();
     const user_id = db_user[0][0].id;
-    req.session.userinfo = user_id;
+    req.session.userinfo = {
+      user_id: db_user[0][0].id,
+      user_email: db_user[0][0].email,
+    };
     //sessions[sessionid] = { email, user_id };
     //res.set("Set-Cookie", `session=${sessionid}`);
     return res.status(200).json({ message: "Login successful!" });
@@ -229,7 +272,10 @@ app.post("/api/admin/login", async (req, res) => {
 
     //const sessionid = uuidv4();
     const user_id = db_user[0][0].id;
-    req.session.userinfo = user_id;
+    req.session.userinfo = {
+      user_id: db_user[0][0].id,
+      user_email: db_user[0][0].email,
+    };
     //sessions[sessionid] = { email, user_id };
     //res.set("Set-Cookie", `session=${sessionid}`);
     return res.status(200).json({ message: "Login successful!" });

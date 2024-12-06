@@ -100,16 +100,29 @@ const get_menu = async (categorie) => {
   }
 };
 
-const get_admindata = async (admin_email) => {
+const get_admindata = async (email) => {
   try {
     const result = await pool.query(
-      `SELECT * FROM wasabi.workers WHERE email = '${admin_email}'`
+      `SELECT * FROM wasabi.worker WHERE eamil = '${email}'`
     );
     console.log(result);
     return result;
   } catch (err) {
     console.log(err);
     return "service offline";
+  }
+};
+
+const get_database_session = async (keyin) => {
+  try {
+    const result = await pool.query(
+      `SELECT * FROM wasabi.session WHERE session_id = '${keyin}'`
+    );
+    //console.log(result);
+    return result;
+  } catch (err) {
+    console.log(err);
+    return err;
   }
 };
 
@@ -123,4 +136,5 @@ export {
   get_buffet_item_next_week,
   get_menu,
   get_admindata,
+  get_database_session,
 };
