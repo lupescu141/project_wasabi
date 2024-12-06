@@ -103,7 +103,7 @@ const get_menu = async (categorie) => {
 const get_admindata = async (email) => {
   try {
     const result = await pool.query(
-      `SELECT * FROM wasabi.worker WHERE eamil = '${email}'`
+      `SELECT * FROM wasabi.workers WHERE email = '${email}'`
     );
     console.log(result);
     return result;

@@ -1,4 +1,5 @@
 // ORDER MANAGEMENT
+
 // Orders Data and Functions
 const orders = [
   { number: 1001, time: "2024-04-25 10:30", progress: "Waiting" },
@@ -180,8 +181,31 @@ buffetOrMenu.addEventListener("change", () => {
   menuFields.classList.toggle("visible", value === "Menu");
 });
 
+get_products = async () => {
+  try {
+    const response = await fetch(`/api/menu?categorie=buffet`, {
+      method: "POST",
+      body: JSON.stringify(),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const result = await response.json();
+    console.log("Response:", result);
+    return result;
+  } catch (error) {
+    console.error("Error:", error);
+  }
+};
+
 // Add new product-weekday rows in Next Week's Buffet modal
-addBuffetRowButton.addEventListener("click", () => {
+addBuffetRowButton.addEventListener("click", async () => {
+  products = await get_products();
+  console.log(products);
+
   const newRow = document.createElement("div");
   newRow.classList.add("form-row");
   newRow.innerHTML = `
@@ -190,10 +214,13 @@ addBuffetRowButton.addEventListener("click", () => {
 
   const productSelect = document.createElement("select");
   productSelect.classList.add("product-select");
-  productSelect.innerHTML = `
-      <option value="Sushi">Sushi</option>
-      <option value="Tempura">Tempura</option>
-    `;
+
+  products.forEach((element) => {
+    productSelect.insertAdjacentHTML(
+      "beforeend",
+      `<option value="${element.product_name}">${element.product_name}</option>`
+    );
+  });
 
   const newRow2 = document.createElement("div");
   newRow2.classList.add("form-row");
@@ -204,9 +231,13 @@ addBuffetRowButton.addEventListener("click", () => {
   const weekdaySelect = document.createElement("select");
   weekdaySelect.classList.add("weekday-select");
   weekdaySelect.innerHTML = `
-      <option value="Monday">Monday</option>
-      <option value="Tuesday">Tuesday</option>
-      <option value="Wednesday">Wednesday</option>
+      <option value="monday">Monday</option>
+      <option value="tuesday">Tuesday</option>
+      <option value="wednesday">Wednesday</option>
+      <option value="thursday">Thursday</option>
+      <option value="friday">Friday</option>
+      <option value="saturday">Saturday</option>
+      <option value="sunday">Sunday</option>
     `;
 
   newRow.appendChild(productSelect);

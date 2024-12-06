@@ -94,6 +94,7 @@ const pagelist = [
   { path: "/employeecontacts", file: "/employeecontacts.html" },
   { path: "/about", file: "/about.html" },
   { path: "/register", file: "/registerprofile.html" },
+  { path: "/admin/login", file: "/adminlogin.html" },
 ];
 
 pagelist.forEach((element) => {
@@ -123,7 +124,7 @@ app.get("/profile", async (req, res) => {
 
 app.get("/management", async (req, res) => {
   const [[db_session]] = await get_database_session(req.signedCookies["keyin"]);
-  const admindata = get_admindata(req?.session.userinfo.user_email);
+  const admindata = await get_admindata(req?.session.userinfo.user_email);
   //console.log(db_session.session_id);
   //console.log(JSON.parse(db_session.data).userinfo);
   //console.log("id:", req.session.userinfo);
@@ -145,7 +146,7 @@ app.get("/management", async (req, res) => {
 app.get("api/get/user", async (req, res) => {
   const query = req.query;
   const result = await get_userdata(query.email);
-  console.log(result);
+  //console.log(result);
   res.send(result);
 });
 
@@ -190,7 +191,7 @@ app.use("/logout", (req, res) => {
 
 app.post("/api/users/login", async (req, res) => {
   const { email, password } = req.body;
-  const db_user = await get_userdata(email);
+  const db_user = await get_admindata(email);
 
   //Verify email
   try {
@@ -271,7 +272,7 @@ app.post("/api/admin/login", async (req, res) => {
     }
 
     //const sessionid = uuidv4();
-    const user_id = db_user[0][0].id;
+    //const user_id = db_user[0][0].id;
     req.session.userinfo = {
       user_id: db_user[0][0].id,
       user_email: db_user[0][0].email,
