@@ -74,10 +74,10 @@ const get_buffet_item = async (type, weekday) => {
   }
 };
 
-const get_buffet_item_next_week = async (type, weekday) => {
+const get_buffet_item_next_week = async (weekday) => {
   try {
     const result = await pool.query(
-      `SELECT product_name, weekday, product_description, type, product_allergens FROM wasabi.weekly_buffet_next_week WHERE type = '${type}' AND weekday = '${weekday}' `
+      `SELECT product_name, weekday, product_description, type, product_allergens FROM wasabi.weekly_buffet_next_week WHERE weekday = '${weekday}' `
     );
     //console.log(result);
     return result;
