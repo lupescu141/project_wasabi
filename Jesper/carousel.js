@@ -2,7 +2,7 @@
 let currentIndex = 0;
 
 // Get all the menu day elements, navigation buttons, and carousel wrapper
-const days = document.querySelectorAll(".menu-day");
+let days = document.querySelectorAll(".menu-day");
 const prevButton = document.getElementById("prev-button");
 const nextButton = document.getElementById("next-button");
 const carouselWrapper = document.querySelector(".carousel-wrapper");
@@ -23,6 +23,58 @@ function formatDate(date) {
     day: "numeric",
     timeZone: "Europe/Helsinki",
   });
+}
+
+// Function to rearrange the DOM elements based on the current day
+function reorderMenuDays() {
+  const today = getLocalDate();
+  const currentDayIndex = today.getDay();
+
+  const dayOrder = [
+    "sunday",
+    "monday",
+    "tuesday",
+    "wednesday",
+    "thursday",
+    "friday",
+    "saturday",
+  ];
+
+  const orderedDays = Array.from(document.querySelectorAll(".menu-day")).sort(
+    (a, b) => {
+      const aIdx = (dayOrder.indexOf(a.id) - currentDayIndex + 7) % 7;
+      const bIdx = (dayOrder.indexOf(b.id) - currentDayIndex + 7) % 7;
+
+      return aIdx - bIdx;
+    }
+  );
+
+  // Log the order of weekdays in the console
+  const orderNames = orderedDays.map((dayEl) => dayEl.id);
+  console.log("Order of weekdays in the carousel:", orderNames);
+
+  // Clear the wrapper and append new DOM elements back
+  while (carouselWrapper.firstChild) {
+    carouselWrapper.removeChild(carouselWrapper.firstChild);
+  }
+
+  orderedDays.forEach((dayEl) => {
+    const h2 = dayEl.querySelector("h2");
+    const formattedDate = formatDate(today);
+
+    h2.textContent = `${dayEl.id.charAt(0).toUpperCase()}${dayEl.id.slice(
+      1
+    )} - ${formattedDate}`;
+
+    carouselWrapper.appendChild(dayEl);
+  });
+
+  // Re-select the DOM elements to refresh `days` references
+  days = document.querySelectorAll(".menu-day");
+  currentIndex = 0; // Reset to initial index after DOM rearrangement
+
+  updateMenuDates(); // Update the headers with the correct dates
+  changeDay(currentIndex);
 }
 
 // Function to update the menu day headers with the correct dates
@@ -70,22 +122,47 @@ function setupMidnightUpdate() {
 }
 
 function changeDay(newIndex) {
+  // Ensure newIndex is wrapped around properly
+  if (newIndex < 0) newIndex = days.length - 1;
+  if (newIndex >= days.length) newIndex = 0;
+
+  // Remove the active class from the current day
   days[currentIndex].classList.remove("active");
 
-  currentIndex = newIndex;
-
-  if (currentIndex < 0) currentIndex = days.length - 1;
-  if (currentIndex >= days.length) currentIndex = 0;
-
-  days[currentIndex].classList.add("active");
-  carouselWrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+  setTimeout(() => {
+    currentIndex = newIndex;
+    days[currentIndex].classList.add("active");
+    carouselWrapper.style.transition = "transform 0.5s ease-in-out";
+    carouselWrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+  }, 500); // Prevent rapid clicking by matching animation duration
 }
 
-prevButton.addEventListener("click", () => changeDay(currentIndex - 1));
-nextButton.addEventListener("click", () => changeDay(currentIndex + 1));
+let isAnimating = false;
+
+prevButton.addEventListener("click", () => {
+  if (isAnimating) return;
+
+  isAnimating = true;
+  changeDay(currentIndex - 1);
+
+  setTimeout(() => {
+    isAnimating = false;
+  }, 500); // Prevent rapid clicking by matching animation duration
+});
+
+nextButton.addEventListener("click", () => {
+  if (isAnimating) return;
+
+  isAnimating = true;
+  changeDay(currentIndex + 1);
+
+  setTimeout(() => {
+    isAnimating = false;
+  }, 500); // Prevent rapid clicking by matching animation duration
+});
 
 days[currentIndex].classList.add("active");
 carouselWrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
 
-updateMenuDates();
+reorderMenuDays(); // Dynamically rearranging DOM elements
 setupMidnightUpdate();
