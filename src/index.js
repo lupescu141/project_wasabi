@@ -355,7 +355,7 @@ app.post("/api/addproduct", upload.single("menuImage"), async (req, res) => {
     if (buffetOrMenu == "Buffet") {
       console.log("buffet triggered");
       await pool.query(
-        `INSERT INTO wasabi.products (product_name, product_description, product_allergens, type) VALUES ('${productName}', '${productDescription}', '${productAllergens}', '${buffetType}')`
+        `INSERT INTO wasabi.products (product_name, product_description, product_allergens, type, categorie) VALUES ('${productName}', '${productDescription}', '${productAllergens}', '${buffetType}', 'buffet')`
       );
     } else if (buffetOrMenu == "Menu") {
       console.log("menu triggered");
