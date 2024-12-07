@@ -793,7 +793,7 @@ button[type="submit"]:hover {
 }
 /* Employee contacts End */
 
-/* Order Management Start */
+/* Management Start */
 .orders {
   max-width: 800px;
   margin: 0 auto;
@@ -956,4 +956,21 @@ button[type="submit"]:hover {
     flex: 1.5;
   }
 }
-/* Order Management End */
+
+#addProductForm button[type="submit"] {
+  padding: 15px 25px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: block;
+  margin: 15px auto;
+}
+
+#addProductForm button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+/* Management End */

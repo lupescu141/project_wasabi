@@ -20,6 +20,8 @@ import path from "path";
 import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+// Multer (For file uploads)
+import multer from "multer";
 //crypting
 import bcrypt from "bcryptjs";
 import { cryptPassword } from "./crypting.js";
@@ -284,3 +286,59 @@ app.post("/api/admin/login", async (req, res) => {
     console.log(err);
   }
 });
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, path.join(__dirname, "public")); // Ensure directory exists
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.originalname); // Keep original file name
+  },
+});
+
+const upload = multer({
+  storage,
+  fileFilter: (req, file, cb) => {
+    const allowedTypes = ["image/jpeg", "image/png", "image/gif"];
+    if (allowedTypes.includes(file.mimetype)) {
+      cb(null, true);
+    } else {
+      cb(new Error("Invalid file type. Only JPEG, PNG, and GIF are allowed."));
+    }
+  },
+});
+
+app.post("/api/addproduct", upload.single("menuImage"), async (req, res) => {
+  const {
+    productName,
+    productDescription,
+    productAllergens,
+    buffetOrMenu,
+    buffetType,
+    menuCategory,
+    menuPrice,
+  } = req.body;
+
+  let fileName = null;
+  if (req.file) {
+    fileName = req.file.originalname; // Save the original file name
+  }
+
+  try {
+    if (buffetOrMenu === "Buffet") {
+      await pool.query(
+        `INSERT INTO wasabi.products (product_name, product_description, product_allergens, type) VALUES ('${productName}', '${productDescription}', '${productAllergens}', '${buffetType}')`
+      );
+    } else if (buffetOrMenu === "Menu") {
+      await pool.query(
+        `INSERT INTO wasabi.products (product_name, product_description, product_allergens, categorie, price, image_src) VALUES ('${productName}', '${productDescription}', '${productAllergens}', '${menuCategory}', '${menuPrice}', '${fileName}')`
+      );
+    }
+    res.status(201).json({ message: "Product added successfully!" });
+  } catch (error) {
+    console.error("Error adding product:", error);
+    res.status(500).json({ error: "Failed to add product." });
+  }
+});
+
+app.use("/public", express.static(path.join(__dirname, "public")));

@@ -23,7 +23,7 @@
       <div class="managementmodal-content">
         <span class="managementclose">&times;</span>
         <h2>Add a Product</h2>
-        <form id="addProductForm">
+        <form id="addProductForm" enctype="multipart/form-data" method="post">
           <div class="form-row">
             <label for="productName">Name of Product</label>
             <input type="text" id="productName" />
@@ -70,7 +70,7 @@
               <input type="file" id="menuImage" name="file" />
             </div>
           </div>
-          <button type="submit"></button>
+          <button type="submit">Add Product</button>
         </form>
       </div>
     </div>
