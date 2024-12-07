@@ -7,22 +7,32 @@ import bcrypt from "bcryptjs";
 test.describe("Navigation test", () => {
   test("Navigation functioning corrrectly", async ({ page }) => {
     await page.goto("http://localhost:3000/home");
+    await page.click(".fa-solid"); // Open navlinks in mobile
     await page.click("text=Menu"); // Click navlink
     await expect(page).toHaveURL("http://localhost:3000/menu"); // Check if correct page
+    await page.click(".fa-solid"); // Open navlinks in mobile
     await page.click("text=Contact"); // Click navlink
     await expect(page).toHaveURL("http://localhost:3000/contact"); // Check if correct page
+    await page.click(".fa-solid"); // Open navlinks in mobile
     await page.click("text=About"); // Click navlink
     await expect(page).toHaveURL("http://localhost:3000/about"); // Check if correct page
+    await page.click(".fa-solid"); // Open navlinks in mobile
     await page.click("text=Home"); // Click navlink
     await expect(page).toHaveURL("http://localhost:3000/home"); // Check if correct page
   });
 });
 
-//Visual comparison test
-test("Visual comparison of home page", async ({ page }) => {
+//Visual comparison tests
+test("Visual comparison of home page in desktop", async ({ page }) => {
   await page.goto("http://localhost:3000/home");
   const screenshot = await page.screenshot();
   expect(screenshot).toMatchSnapshot("home.png");
+});
+
+test("Visual comparison of home page in mobile", async ({ page }) => {
+  await page.goto("http://localhost:3000/home");
+  const screenshot = await page.screenshot();
+  expect(screenshot).toMatchSnapshot("mobilehome.png");
 });
 
 // Form test (register)
