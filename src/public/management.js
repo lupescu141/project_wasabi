@@ -430,6 +430,7 @@ document
     formData.append("productName", productName);
     formData.append("productDescription", productDescription);
     formData.append("productAllergens", productAllergens);
+    formData.append("buffetOrMenu", buffetOrMenu);
 
     if (buffetOrMenu == "Buffet") {
       const buffetType = document.getElementById("buffetType").value;
