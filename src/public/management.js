@@ -556,7 +556,7 @@ async function populateNextWeekBuffetForm() {
       document.getElementById("productDescription").value =
         rowData.product_description || "";
       document.getElementById("productAllergens").value =
-        rowData.Product_allergens || ""; // Adjust key names if necessary
+        rowData.product_allergens || "";
       document.getElementById("type").value = rowData.type || "";
     });
   } catch (error) {
