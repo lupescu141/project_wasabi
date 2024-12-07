@@ -290,6 +290,80 @@ function sortOrdersByProgress() {
   orders.sort((a, b) => priority[a.progress] - priority[b.progress]);
 }
 
+document
+  .getElementById("addProductForm")
+  .addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    const productName = document.getElementById("productName").value.trim();
+    const productDescription = document
+      .getElementById("productDescription")
+      .value.trim();
+    const productAllergens = document
+      .getElementById("productAllergens")
+      .value.trim();
+    const buffetOrMenu = document.getElementById("buffetOrMenu").value;
+
+    formData.append("productName", productName);
+    formData.append("productDescription", productDescription);
+    formData.append("productAllergens", productAllergens);
+
+    if (buffetOrMenu === "Buffet") {
+      const buffetType = document.getElementById("buffetType").value;
+      formData.append("buffetType", buffetType);
+    } else if (buffetOrMenu === "Menu") {
+      const menuCategory = document.getElementById("menuCategory").value;
+      const menuPrice = document.getElementById("menuPrice").value;
+      const menuImage = document.getElementById("menuImage").files[0];
+
+      formData.append("menuCategory", menuCategory);
+      formData.append("menuPrice", menuPrice);
+
+      if (menuImage) {
+        formData.append("menuImage", menuImage);
+      }
+    }
+
+    try {
+      const response = await fetch("/api/add-product", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to add product.");
+      }
+
+      const result = await response.json();
+      alert("Product added successfully!");
+      console.log("Result:", result);
+
+      // Reset the form and close the modal
+      document.getElementById("addProductForm").reset();
+      document.getElementById("addProductModal").style.display = "none";
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Error adding product.");
+    }
+  });
+
+// Function to clear all select fields when opening the modal
+// Function to clear all select fields when opening the modal
+function resetModalSelects() {
+  const selects = document.querySelectorAll("#addProductForm select");
+
+  selects.forEach((select) => {
+    select.value = ""; // Set the select value to empty string
+  });
+}
+
+// Event listener to open the modal
+document.getElementById("openAddProductModal").addEventListener("click", () => {
+  resetModalSelects();
+  document.getElementById("addProductModal").style.display = "block";
+});
+
 // Initialize the event listeners after DOM content is loaded
 document.addEventListener("DOMContentLoaded", () => {
   sortOrdersByProgress();
