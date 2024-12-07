@@ -531,8 +531,37 @@ button[type="submit"]:hover {
   position: relative;
   display: flex;
   width: 100%;
-  transition: transform 0.5s ease-in-out; /* This enables the sliding transition */
+  transition: transform 0.1s ease-in-out; /* This enables the sliding transition */
 }
+
+.carousel-wrapper h3 {
+  margin-top: 20px;
+  padding: 10px;
+}
+
+/* Style the day-menu items */
+.day-menu-list li {
+  padding: 10px;
+  margin: 10px;
+}
+
+/* Bold product names */
+.day-menu-list li strong {
+  font-weight: bold;
+  color: black;
+}
+
+/* Product descriptions */
+.day-menu-list li p {
+  margin: 5px 0;
+  color: black;
+}
+
+/* Allergen info */
+.day-menu-list li p strong {
+  color: #d32f2f;
+}
+
 
 /* Menu Day (each individual day's content) */
 .menu-day {
@@ -540,8 +569,8 @@ button[type="submit"]:hover {
   width: 100%;
   padding: 20px;
   text-align: center;
-  opacity: 0; /* Initially hidden */
-  transition: opacity 1s ease-in-out;
+  opacity: 1; /* Initially hidden */
+  transition: transform 0.1s ease-in-out;
 }
 
 /* Active class to display the current day's menu */
@@ -764,7 +793,7 @@ button[type="submit"]:hover {
 }
 /* Employee contacts End */
 
-/* Order Management Start */
+/* Management Start */
 .orders {
   max-width: 800px;
   margin: 0 auto;
@@ -928,4 +957,25 @@ button[type="submit"]:hover {
     flex: 1.5;
   }
 }
+<<<<<<< HEAD
 /* Order Management End */
+=======
+
+#addProductForm button[type="submit"] {
+  padding: 15px 25px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: block;
+  margin: 15px auto;
+}
+
+#addProductForm button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+/* Management End */
+>>>>>>> 24d86af247e2a483a501346dae77ffa22556175f
