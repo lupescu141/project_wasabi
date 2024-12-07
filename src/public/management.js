@@ -539,8 +539,8 @@ async function populateNextWeekBuffetForm() {
       console.log("Product:", product);
 
       const option = document.createElement("option");
-      option.value = product.productName; // Use productName as the value
-      option.textContent = product.productName; // Display productName
+      option.value = product.product_name; // Use productName as the value
+      option.textContent = product.product_name; // Display productName
       option.dataset.rowData = JSON.stringify(product); // Store the full row data in a data attribute
       productSelect.appendChild(option);
     });
@@ -554,9 +554,9 @@ async function populateNextWeekBuffetForm() {
       console.log("Row Data:", rowData);
 
       document.getElementById("productDescription").value =
-        rowData.productDescription || "";
+        rowData.product_description || "";
       document.getElementById("productAllergens").value =
-        rowData.ProductAllergens || ""; // Adjust key names if necessary
+        rowData.Product_allergens || ""; // Adjust key names if necessary
       document.getElementById("type").value = rowData.type || "";
     });
   } catch (error) {
