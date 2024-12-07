@@ -244,6 +244,7 @@ const delete_next_buffet = async (id) => {
 fill_modal = async () => {
   const modal = document.getElementById("nextWeekBuffetForm");
   const next_week_buffet = await get_buffet_nextweek();
+  console.log(next_week_buffet);
 
   next_week_buffet.forEach((element) => {
     const ul = document.createElement("ul");
@@ -286,7 +287,7 @@ fill_modal = async () => {
 };
 
 // Add new product-weekday rows in Next Week's Buffet modal
-addBuffetRowButton.addEventListener("click", async () => {
+/*addBuffetRowButton.addEventListener("click", async () => {
   products = await get_products();
 
   const newRow = document.createElement("div");
@@ -366,7 +367,7 @@ addBuffetRowButton.addEventListener("click", async () => {
   newRow.appendChild(weekdaySelect);
 
   nextWeekBuffetForm.insertBefore(newRow, addBuffetRowButton);
-});
+});*/
 
 // Function to initialize event listeners
 function initializeEventListeners() {
@@ -574,12 +575,8 @@ document.getElementById("openAddProductModal").addEventListener("click", () => {
   document.getElementById("addProductModal").style.display = "block";
 });
 
-// Initialize the event listeners after DOM content is loaded
-document.addEventListener("DOMContentLoaded", () => {
-  sortOrdersByProgress();
-  renderOrders(orders);
-  populateNextWeekBuffetForm();
-  initializeEventListeners();
-});
-
+initializeEventListeners();
+sortOrdersByProgress();
+renderOrders(orders);
+populateNextWeekBuffetForm();
 fill_modal();
