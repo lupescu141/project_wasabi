@@ -471,7 +471,94 @@ document
     }
   });
 
-// Function to clear all select fields when opening the modal
+document
+  .getElementById("nextWeekBuffetForm")
+  .addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const productName = document.getElementById("product-select").value.trim();
+    const weekday = document.getElementById("weekday-select").value.trim();
+    const productDescription = document
+      .getElementById("productDescription")
+      .value.trim();
+    const type = document.getElementById("type").value.trim();
+    const productAllergens = document
+      .getElementById("productAllergens")
+      .value.trim();
+
+    // Ensure all fields are filled
+    if (!productName || !weekday) {
+      alert("Please select a product and weekday.");
+      return;
+    }
+
+    const data = {
+      productName,
+      productDescription,
+      productAllergens,
+      type,
+      weekday,
+    };
+
+    try {
+      const response = await fetch("/api/addbuffetproduct", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to add product.");
+      }
+
+      const result = await response.json();
+      alert("Product added successfully!");
+      console.log("Result:", result);
+
+      // Reset the form and close the modal
+      document.getElementById("nextWeekBuffetForm").reset();
+      document.getElementById("nextWeekBuffetModal").style.display = "none";
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Error adding product.");
+    }
+  });
+
+// Function to populate nextWeekBuffetForm
+async function populateNextWeekBuffetForm() {
+  try {
+    // Replace the simulated data with a real API call
+    const response = await fetch("/api/getbuffetproducts");
+    const products = await response.json();
+
+    const productSelect = document.getElementById("product-select");
+
+    // Populate the product-select dropdown
+    products.forEach((product) => {
+      const option = document.createElement("option");
+      option.value = product.productName; // Use productName as the value
+      option.textContent = product.productName; // Display productName
+      option.dataset.rowData = JSON.stringify(product); // Store the full row data in a data attribute
+      productSelect.appendChild(option);
+    });
+
+    // Add event listener to update form fields when a product is selected
+    productSelect.addEventListener("change", (event) => {
+      const selectedOption = event.target.options[event.target.selectedIndex];
+      const rowData = JSON.parse(selectedOption.dataset.rowData || "{}");
+
+      // Populate read-only input fields with the selected product's details
+      document.getElementById("productDescription").value =
+        rowData.productDescription || "";
+      document.getElementById("productAllergens").value =
+        rowData.productAllergens || "";
+      document.getElementById("type").value = rowData.type || "";
+    });
+  } catch (error) {
+    console.error("Error populating form:", error);
+  }
+}
+
 // Function to clear all select fields when opening the modal
 function resetModalSelects() {
   const selects = document.querySelectorAll("#addProductForm select");
@@ -491,6 +578,7 @@ document.getElementById("openAddProductModal").addEventListener("click", () => {
 document.addEventListener("DOMContentLoaded", () => {
   sortOrdersByProgress();
   renderOrders(orders);
+  populateNextWeekBuffetForm();
   initializeEventListeners();
 });
 
