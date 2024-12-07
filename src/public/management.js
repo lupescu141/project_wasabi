@@ -536,6 +536,8 @@ async function populateNextWeekBuffetForm() {
 
     // Populate the product-select dropdown
     products.forEach((product) => {
+      console.log("Product:", product);
+
       const option = document.createElement("option");
       option.value = product.productName; // Use productName as the value
       option.textContent = product.productName; // Display productName
@@ -546,13 +548,15 @@ async function populateNextWeekBuffetForm() {
     // Add event listener to update form fields when a product is selected
     productSelect.addEventListener("change", (event) => {
       const selectedOption = event.target.options[event.target.selectedIndex];
-      const rowData = JSON.parse(selectedOption.dataset.rowData || "{}");
+      console.log("Selected Option:", selectedOption);
 
-      // Populate read-only input fields with the selected product's details
+      const rowData = JSON.parse(selectedOption.dataset.rowData || "{}");
+      console.log("Row Data:", rowData);
+
       document.getElementById("productDescription").value =
         rowData.productDescription || "";
       document.getElementById("productAllergens").value =
-        rowData.productAllergens || "";
+        rowData.ProductAllergens || ""; // Adjust key names if necessary
       document.getElementById("type").value = rowData.type || "";
     });
   } catch (error) {
@@ -563,9 +567,12 @@ async function populateNextWeekBuffetForm() {
 // Function to clear all select fields when opening the modal
 function resetModalSelects() {
   const selects = document.querySelectorAll("#addProductForm select");
-
+  const buffetselects = document.querySelectorAll("#nextWeekBuffetForm select");
   selects.forEach((select) => {
     select.value = ""; // Set the select value to empty string
+  });
+  buffetselects.forEach((select) => {
+    select.value = "";
   });
 }
 
