@@ -300,7 +300,6 @@ app.post("/api/admin/login", async (req, res) => {
   }
 });
 
-<<<<<<< HEAD
 app.post("/api/delete_weeklybuffet_next", async (req, res) => {
   const { id } = req.query;
   console.log(id);
@@ -312,7 +311,7 @@ app.post("/api/delete_weeklybuffet_next", async (req, res) => {
     return res.status(500).json({ error: "Failed to fetch buffet items." });
   }
 });
-=======
+
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, path.join(__dirname, "public")); // Ensure directory exists
@@ -351,21 +350,23 @@ app.post("/api/addproduct", upload.single("menuImage"), async (req, res) => {
   }
 
   try {
-    if (buffetOrMenu === "Buffet") {
+    console.log(buffetOrMenu);
+    console.log(menuCategory);
+    if (buffetOrMenu == "Buffet") {
+      console.log("buffet triggered");
       await pool.query(
         `INSERT INTO wasabi.products (product_name, product_description, product_allergens, type) VALUES ('${productName}', '${productDescription}', '${productAllergens}', '${buffetType}')`
       );
-    } else if (buffetOrMenu === "Menu") {
+    } else if (buffetOrMenu == "Menu") {
+      console.log("menu triggered");
       await pool.query(
         `INSERT INTO wasabi.products (product_name, product_description, product_allergens, categorie, price, image_src) VALUES ('${productName}', '${productDescription}', '${productAllergens}', '${menuCategory}', '${menuPrice}', '${fileName}')`
       );
     }
+
     res.status(201).json({ message: "Product added successfully!" });
   } catch (error) {
     console.error("Error adding product:", error);
     res.status(500).json({ error: "Failed to add product." });
   }
 });
-
-app.use("/public", express.static(path.join(__dirname, "public")));
->>>>>>> 24d86af247e2a483a501346dae77ffa22556175f

@@ -431,10 +431,10 @@ document
     formData.append("productDescription", productDescription);
     formData.append("productAllergens", productAllergens);
 
-    if (buffetOrMenu === "Buffet") {
+    if (buffetOrMenu == "Buffet") {
       const buffetType = document.getElementById("buffetType").value;
       formData.append("buffetType", buffetType);
-    } else if (buffetOrMenu === "Menu") {
+    } else if (buffetOrMenu == "Menu") {
       const menuCategory = document.getElementById("menuCategory").value;
       const menuPrice = document.getElementById("menuPrice").value;
       const menuImage = document.getElementById("menuImage").files[0];
@@ -448,7 +448,7 @@ document
     }
 
     try {
-      const response = await fetch("/api/add-product", {
+      const response = await fetch("/api/addproduct", {
         method: "POST",
         body: formData,
       });

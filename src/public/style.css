@@ -562,7 +562,6 @@ button[type="submit"]:hover {
   color: #d32f2f;
 }
 
-
 /* Menu Day (each individual day's content) */
 .menu-day {
   flex: 0 0 100%; /* Each day will take up 100% of the carousel width */
@@ -957,9 +956,7 @@ button[type="submit"]:hover {
     flex: 1.5;
   }
 }
-<<<<<<< HEAD
 /* Order Management End */
-=======
 
 #addProductForm button[type="submit"] {
   padding: 15px 25px;
@@ -978,4 +975,3 @@ button[type="submit"]:hover {
 }
 
 /* Management End */
->>>>>>> 24d86af247e2a483a501346dae77ffa22556175f
