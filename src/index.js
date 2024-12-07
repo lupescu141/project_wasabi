@@ -137,7 +137,7 @@ app.get("/management", async (req, res) => {
 
   if (
     req?.signedCookies["keyin"] == db_session?.session_id &&
-    req?.session.userinfo.user_id ==
+    req?.session?.userinfo?.user_id ==
       JSON.parse(db_session?.data)?.userinfo.user_id &&
     admindata[0][0]?.email == req?.session.userinfo.user_email
   ) {
