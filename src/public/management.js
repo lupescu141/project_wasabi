@@ -1,5 +1,3 @@
-// ORDER MANAGEMENT
-
 // Orders Data and Functions
 const orders = [
   { number: 1001, time: "2024-04-25 10:30", progress: "Waiting" },
@@ -201,10 +199,95 @@ get_products = async () => {
   }
 };
 
+get_buffet_nextweek = async () => {
+  try {
+    const response = await fetch(`/api/weekly_buffet_nextweek`, {
+      method: "POST",
+      body: JSON.stringify(),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const result = await response.json();
+    console.log("Response:", result);
+    return result;
+  } catch (error) {
+    console.error("Error:", error);
+  }
+};
+
+const delete_next_buffet = async (id) => {
+  console.log(id);
+
+  try {
+    const response = await fetch(`/api/delete_weeklybuffet_next?id=${id}`, {
+      method: "POST",
+      body: JSON.stringify(),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const result = await response.json();
+    console.log("Response:", result);
+    return;
+  } catch (error) {
+    console.error("Error:", error);
+  }
+};
+
+fill_modal = async () => {
+  const modal = document.getElementById("nextWeekBuffetForm");
+  const next_week_buffet = await get_buffet_nextweek();
+
+  next_week_buffet.forEach((element) => {
+    const ul = document.createElement("ul");
+    const product_name = document.createElement("li");
+    const weekday = document.createElement("li");
+    const product_description = document.createElement("li");
+    const product_allergens = document.createElement("li");
+    const price_text = document.createElement("li");
+    const delete_button = document.createElement("button");
+    delete_button.setAttribute(
+      "onclick",
+      `delete_next_buffet('${element.id}')`
+    );
+    delete_button.innerHTML = "Delete from database";
+    product_name.textContent = element.product_name;
+    weekday.textContent = element.weekday;
+    product_description.textContent = element.product_description;
+    product_allergens.textContent = element.product_allergens;
+    price_text.textContent = element.price_text;
+    ul.appendChild(product_name);
+    ul.appendChild(weekday);
+    ul.appendChild(product_description);
+    ul.appendChild(product_allergens);
+    ul.appendChild(price_text);
+    ul.appendChild(delete_button);
+    modal.insertBefore(ul, modal.firstChild);
+  });
+
+  /* modal.insertAdjacentHTML(
+    "afterbegin",
+    `
+     <ul>
+        <li>product_name</li>
+        <li>weekday</li>
+        <li>product_description</li>
+        <li>product_allergens</li>
+        <li>price_text</li>
+      </ul>`
+  );*/
+};
+
 // Add new product-weekday rows in Next Week's Buffet modal
 addBuffetRowButton.addEventListener("click", async () => {
   products = await get_products();
-  console.log(products);
 
   const newRow = document.createElement("div");
   newRow.classList.add("form-row");
@@ -221,6 +304,42 @@ addBuffetRowButton.addEventListener("click", async () => {
       `<option value="${element.product_name}">${element.product_name}</option>`
     );
   });
+
+  const description = document.createElement("p");
+  const type = document.createElement("p");
+  const allergens = document.createElement("p");
+
+  description.innerText = `Description: ${
+    products.filter((value) => value.product_name == productSelect.value)[0]
+      .product_description
+  }`;
+
+  type.innerText = `Type: ${
+    products.filter((value) => value.product_name == productSelect.value)[0]
+      .type
+  }`;
+
+  allergens.innerText = `Allergens: ${
+    products.filter((value) => value.product_name == productSelect.value)[0]
+      .product_allergens
+  }`;
+
+  productSelect.onchange = () => {
+    description.innerText = `Description: ${
+      products.filter((value) => value.product_name == productSelect.value)[0]
+        .product_description
+    }`;
+
+    type.innerText = `Type: ${
+      products.filter((value) => value.product_name == productSelect.value)[0]
+        .type
+    }`;
+
+    allergens.innerText = `Allergens: ${
+      products.filter((value) => value.product_name == productSelect.value)[0]
+        .product_allergens
+    }`;
+  };
 
   const newRow2 = document.createElement("div");
   newRow2.classList.add("form-row");
@@ -241,6 +360,9 @@ addBuffetRowButton.addEventListener("click", async () => {
     `;
 
   newRow.appendChild(productSelect);
+  newRow.appendChild(description);
+  newRow.appendChild(type);
+  newRow.appendChild(allergens);
   newRow.appendChild(weekdaySelect);
 
   nextWeekBuffetForm.insertBefore(newRow, addBuffetRowButton);
@@ -296,3 +418,5 @@ document.addEventListener("DOMContentLoaded", () => {
   renderOrders(orders);
   initializeEventListeners();
 });
+
+fill_modal();

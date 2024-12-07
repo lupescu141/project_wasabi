@@ -87,6 +87,19 @@ const get_buffet_item_next_week = async (weekday) => {
   }
 };
 
+const get_buffet_nextweek = async (weekday) => {
+  try {
+    const result = await pool.query(
+      `SELECT * FROM wasabi.weekly_buffet_next_week`
+    );
+    //console.log(result);
+    return result;
+  } catch (err) {
+    console.log(err);
+    return err;
+  }
+};
+
 const get_menu = async (categorie) => {
   try {
     const result = await pool.query(
@@ -126,6 +139,19 @@ const get_database_session = async (keyin) => {
   }
 };
 
+const delete_from_weeklybuffet = async (id) => {
+  try {
+    const result = await pool.query(
+      `DELETE FROM wasabi.weekly_buffet_next_week WHERE id = '${id}'`
+    );
+    //console.log(result);
+    return result;
+  } catch (err) {
+    console.log(err);
+    return err;
+  }
+};
+
 export {
   pool,
   get_all_from_table,
@@ -137,4 +163,6 @@ export {
   get_menu,
   get_admindata,
   get_database_session,
+  get_buffet_nextweek,
+  delete_from_weeklybuffet,
 };

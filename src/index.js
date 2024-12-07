@@ -9,6 +9,8 @@ import {
   get_menu,
   get_admindata,
   get_database_session,
+  get_buffet_nextweek,
+  delete_from_weeklybuffet,
 } from "./database.js";
 import dotenv from "dotenv";
 dotenv.config();
@@ -124,7 +126,7 @@ app.get("/profile", async (req, res) => {
 
 app.get("/management", async (req, res) => {
   const [[db_session]] = await get_database_session(req.signedCookies["keyin"]);
-  const admindata = await get_admindata(req?.session.userinfo.user_email);
+  const admindata = await get_admindata(req?.session?.userinfo?.user_email);
   //console.log(db_session.session_id);
   //console.log(JSON.parse(db_session.data).userinfo);
   //console.log("id:", req.session.userinfo);
@@ -191,7 +193,7 @@ app.use("/logout", (req, res) => {
 
 app.post("/api/users/login", async (req, res) => {
   const { email, password } = req.body;
-  const db_user = await get_admindata(email);
+  const db_user = await get_userdata(email);
 
   //Verify email
   try {
@@ -243,6 +245,17 @@ app.post("/api/weekly_buffet_next", async (req, res) => {
   }
 });
 
+app.post("/api/weekly_buffet_nextweek", async (req, res) => {
+  //console.log(type, weekday);
+  try {
+    const [rows] = await get_buffet_nextweek();
+    console.log(rows);
+    return res.json(rows);
+  } catch (error) {
+    return res.status(500).json({ error: "Failed to fetch buffet items." });
+  }
+});
+
 app.post("/api/menu", async (req, res) => {
   const { categorie } = req.query;
   //console.log(type, weekday);
@@ -282,5 +295,17 @@ app.post("/api/admin/login", async (req, res) => {
     return res.status(200).json({ message: "Login successful!" });
   } catch (err) {
     console.log(err);
+  }
+});
+
+app.post("/api/delete_weeklybuffet_next", async (req, res) => {
+  const { id } = req.query;
+  console.log(id);
+  try {
+    const result = await delete_from_weeklybuffet(id);
+    console.log(rows);
+    return res.json(rows);
+  } catch (error) {
+    return res.status(500).json({ error: "Failed to fetch buffet items." });
   }
 });
