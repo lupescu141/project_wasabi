@@ -104,16 +104,20 @@ pagelist.forEach((element) => {
 
 app.get("/profile", async (req, res) => {
   const [[db_session]] = await get_database_session(req.signedCookies["keyin"]);
-  //console.log(db_session.session_id);
-  //console.log(JSON.parse(db_session.data).userinfo);
-  //console.log("id:", req.session.userinfo);
-  //console.log(req.signedCookies["keyin"]);
-  //console.log(req?.session.userinfo.user_id);
+  console.log(req.signedCookies["keyin"], db_session?.session_id);
+  console.log(
+    req.session.userinfo?.user_id,
+    JSON.parse(db_session?.data).userinfo?.user_id
+  );
+
+  if (db_session?.session_id == undefined) {
+    return res.status(401).send("Invalid session");
+  }
 
   if (
-    req?.signedCookies["keyin"] == db_session?.session_id &&
-    req?.session.userinfo.user_id ==
-      JSON.parse(db_session?.data)?.userinfo.user_id
+    req.signedCookies["keyin"] == db_session?.session_id &&
+    req.session.userinfo?.user_id ==
+      JSON.parse(db_session?.data).userinfo?.user_id
   ) {
     res.sendFile(path.join(__dirname, `/public/editprofile.html`));
   } else {
@@ -123,7 +127,7 @@ app.get("/profile", async (req, res) => {
 
 app.get("/management", async (req, res) => {
   const [[db_session]] = await get_database_session(req.signedCookies["keyin"]);
-  const admindata = await get_admindata(req?.session?.userinfo?.user_email);
+  const admindata = await get_admindata(req.session.userinfo?.user_email);
   //console.log(db_session.session_id);
   //console.log(JSON.parse(db_session.data).userinfo);
   //console.log("id:", req.session.userinfo);
@@ -133,7 +137,7 @@ app.get("/management", async (req, res) => {
   if (
     req?.signedCookies["keyin"] == db_session?.session_id &&
     req?.session?.userinfo?.user_id ==
-      JSON.parse(db_session?.data)?.userinfo.user_id &&
+      JSON.parse(db_session.data).userinfo?.user_id &&
     admindata[0][0]?.email == req?.session.userinfo.user_email
   ) {
     res.sendFile(path.join(__dirname, `/public/management.html`));

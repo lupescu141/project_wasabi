@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("profile-form");
 
   // Fetch user data and populate fields
-  fetch("/api/users")
+  /*fetch("/api/users")
     .then((response) => response.json())
     .then((data) => {
       nameInput.value = data.name;
@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
       passwordInput.value = data.password;
       confirmPasswordInput.value = data.password;
     })
-    .catch((error) => console.error("Error fetching user data:", error));
+    .catch((error) => console.error("Error fetching user data:", error));*/
 
   // Handle form submission
   form.addEventListener("submit", (event) => {
