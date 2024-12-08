@@ -1,3 +1,5 @@
+import { get_all_from_table } from "../database";
+
 // Orders Data and Functions
 const orders = [
   { number: 1001, time: "2024-04-25 10:30", progress: "Waiting" },
@@ -563,6 +565,65 @@ async function populateNextWeekBuffetForm() {
   }
 }
 
+const delete_products = async (id, thiselement) => {
+  console.log(id);
+  thiselement.remove;
+  try {
+    const response = await fetch(`/api/delete_from_products?id=${id}`, {
+      method: "POST",
+      body: JSON.stringify(),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const result = await response.json();
+    console.log("Response:", result);
+    return;
+  } catch (error) {
+    console.error("Error:", error);
+  }
+};
+
+fill_delete_product_modal = async () => {
+  const modal = document.getElementById("deleteProductForm");
+  const all_products = await get_all_from_table(products);
+  console.log(all_products);
+
+  all_products.forEach((element) => {
+    const ul = document.createElement("ul");
+    const product_name = document.createElement("li");
+    const category = document.createElement("li");
+    const type = document.createElement("li");
+    const weekday = document.createElement("li");
+    const product_description = document.createElement("li");
+    const product_allergens = document.createElement("li");
+    const price_text = document.createElement("li");
+    const delete_button = document.createElement("input");
+    delete_button.type = "button";
+    delete_button.setAttribute("onclick", `delete_products('${element.id}')`);
+    delete_button.value = "Delete from database";
+
+    product_name.textContent = element.product_name;
+    category.textContent = element.categorie;
+    type.textContent = element.type;
+    weekday.textContent = element.weekday;
+    product_description.textContent = element.product_description;
+    product_allergens.textContent = element.product_allergens;
+    price_text.textContent = element.price_text;
+    ul.appendChild(product_name);
+    ul.appendChild(category);
+    ul.appendChild(type);
+    ul.appendChild(weekday);
+    ul.appendChild(product_description);
+    ul.appendChild(product_allergens);
+    ul.appendChild(price_text);
+    ul.appendChild(delete_button);
+    modal.insertBefore(ul, modal.firstChild);
+  });
+};
 // Function to clear all select fields when opening the modal
 function resetModalSelects() {
   const selects = document.querySelectorAll("#addProductForm select");
@@ -586,3 +647,4 @@ sortOrdersByProgress();
 renderOrders(orders);
 populateNextWeekBuffetForm();
 fill_modal();
+fill_delete_product_modal();

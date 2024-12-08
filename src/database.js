@@ -22,10 +22,10 @@ const get_all_from_table = async (table_name) => {
   }
 };
 
-const get_row_from_table = async (table_name, colum_name, criteria) => {
+const get_row_from_table = async (table_name, column_name, criteria) => {
   try {
     const result = await pool.query(
-      `SELECT * FROM wasabi.${table_name} WHERE ${colum_name} = '${criteria}'`
+      `SELECT * FROM wasabi.${table_name} WHERE ${column_name} = '${criteria}'`
     );
     console.log(result);
     return result;
@@ -152,6 +152,19 @@ const delete_from_weeklybuffet = async (id) => {
   }
 };
 
+const delete_from_products = async (id) => {
+  try {
+    const result = await pool.query(
+      `DELETE FROM wasabi.products WHERE id = '${id}'`
+    );
+    //console.log(result);
+    return result;
+  } catch (err) {
+    console.log(err);
+    return err;
+  }
+};
+
 export {
   pool,
   get_all_from_table,
@@ -165,4 +178,5 @@ export {
   get_database_session,
   get_buffet_nextweek,
   delete_from_weeklybuffet,
+  delete_from_products,
 };
