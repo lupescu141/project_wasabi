@@ -135,10 +135,17 @@ app.get("/management", async (req, res) => {
   //console.log(req?.session.userinfo.user_id);
 
   if (
+    db_session?.session_id == undefined ||
+    admindata[0][0]?.email == undefined
+  ) {
+    return res.status(401).send("Invalid session");
+  }
+
+  if (
     req?.signedCookies["keyin"] == db_session?.session_id &&
     req?.session?.userinfo?.user_id ==
       JSON.parse(db_session.data).userinfo?.user_id &&
-    admindata[0][0]?.email == req?.session.userinfo.user_email
+    admindata[0][0]?.email == req.session.userinfo?.user_email
   ) {
     res.sendFile(path.join(__dirname, `/public/management.html`));
   } else {
