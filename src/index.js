@@ -28,16 +28,10 @@ import multer from "multer";
 import bcrypt from "bcryptjs";
 import { cryptPassword } from "./crypting.js";
 //universally unique identifiers
-import { v4 as uuidv4 } from "uuid";
-//cookie perser
+//import { v4 as uuidv4 } from "uuid";
+//cookie parser
 import cookieParser from "cookie-parser";
 app.use(cookieParser(process.env.SECRET));
-
-function getcookie(req) {
-  var cookie = req.headers.cookie;
-  // user=someone; session=mySessionID
-  return cookie.split("; ");
-}
 
 //body parser
 import bodyParser from "body-parser";
@@ -110,10 +104,10 @@ pagelist.forEach((element) => {
 app.get("/profile", async (req, res) => {
   const [[db_session]] = await get_database_session(req.signedCookies["keyin"]);
   //console.log(db_session.session_id);
-  console.log(JSON.parse(db_session.data).userinfo);
+  //console.log(JSON.parse(db_session.data).userinfo);
   //console.log("id:", req.session.userinfo);
   //console.log(req.signedCookies["keyin"]);
-  console.log(req?.session.userinfo.user_id);
+  //console.log(req?.session.userinfo.user_id);
 
   if (
     req?.signedCookies["keyin"] == db_session?.session_id &&
@@ -228,7 +222,7 @@ app.post("/api/weekly_buffet", async (req, res) => {
   //console.log(type, weekday);
   try {
     const [rows] = await get_buffet_item(type, weekday);
-    console.log(rows);
+    //console.log(rows);
     return res.status(200).json(rows);
   } catch (error) {
     return res.status(500).json({ error: "Failed to fetch buffet items." });
@@ -240,7 +234,7 @@ app.post("/api/weekly_buffet_next", async (req, res) => {
   //console.log(type, weekday);
   try {
     const [rows] = await get_buffet_item_next_week(type, weekday);
-    console.log(rows);
+    //console.log(rows);
     return res.json(rows);
   } catch (error) {
     return res.status(500).json({ error: "Failed to fetch buffet items." });
@@ -251,7 +245,7 @@ app.post("/api/weekly_buffet_nextweek", async (req, res) => {
   //console.log(type, weekday);
   try {
     const [rows] = await get_buffet_nextweek();
-    console.log(rows);
+    //console.log(rows);
     return res.json(rows);
   } catch (error) {
     return res.status(500).json({ error: "Failed to fetch buffet items." });
@@ -263,7 +257,7 @@ app.post("/api/menu", async (req, res) => {
   //console.log(type, weekday);
   try {
     const [rows] = await get_menu(categorie);
-    console.log(rows);
+    //console.log(rows);
     return res.json(rows);
   } catch (error) {
     return res.status(500).json({ error: "Failed to fetch buffet items." });
@@ -302,10 +296,10 @@ app.post("/api/admin/login", async (req, res) => {
 
 app.post("/api/delete_weeklybuffet_next", async (req, res) => {
   const { id } = req.query;
-  console.log(id);
+  //console.log(id);
   try {
     const result = await delete_from_weeklybuffet(id);
-    console.log(result);
+    //console.log(result);
     return res.json(result);
   } catch (error) {
     return res.status(500).json({ error: "Failed to fetch buffet items." });
@@ -350,15 +344,15 @@ app.post("/api/addproduct", upload.single("menuImage"), async (req, res) => {
   }
 
   try {
-    console.log(buffetOrMenu);
-    console.log(menuCategory);
+    //console.log(buffetOrMenu);
+    //console.log(menuCategory);
     if (buffetOrMenu == "Buffet") {
-      console.log("buffet triggered");
+      //console.log("buffet triggered");
       await pool.query(
         `INSERT INTO wasabi.products (product_name, product_description, product_allergens, type, categorie) VALUES ('${productName}', '${productDescription}', '${productAllergens}', '${buffetType}', 'buffet')`
       );
     } else if (buffetOrMenu == "Menu") {
-      console.log("menu triggered");
+      //console.log("menu triggered");
       await pool.query(
         `INSERT INTO wasabi.products (product_name, product_description, product_allergens, categorie, price, image_src) VALUES ('${productName}', '${productDescription}', '${productAllergens}', '${menuCategory}', '${menuPrice}', '${fileName}')`
       );
@@ -388,13 +382,13 @@ app.post("/api/addbuffetproduct", async (req, res) => {
     req.body;
 
   try {
-    console.log(
+    /*console.log(
       productName,
       productDescription,
       productAllergens,
       type,
       weekday
-    );
+    );*/
     await pool.query(
       `INSERT INTO wasabi.weekly_buffet_next_week (product_name, product_description, product_allergens, type, weekday) VALUES ('${productName}', '${productDescription}', '${productAllergens}', '${type}', '${weekday}')`
     );
