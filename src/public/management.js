@@ -219,8 +219,9 @@ get_buffet_nextweek = async () => {
   }
 };
 
-const delete_next_buffet = async (id) => {
+const delete_next_buffet = async (id, thiselement) => {
   console.log(id);
+  thiselement.remove;
   try {
     const response = await fetch(`/api/delete_weeklybuffet_next?id=${id}`, {
       method: "POST",
