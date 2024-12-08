@@ -1,5 +1,3 @@
-import { get_all_from_table } from "../database";
-
 // Orders Data and Functions
 const orders = [
   { number: 1001, time: "2024-04-25 10:30", progress: "Waiting" },
@@ -567,7 +565,7 @@ async function populateNextWeekBuffetForm() {
 
 const delete_products = async (id, thiselement) => {
   console.log(id);
-  thiselement.remove;
+  thiselement.remove();
   try {
     const response = await fetch(`/api/delete_from_products?id=${id}`, {
       method: "POST",
@@ -603,7 +601,10 @@ fill_delete_product_modal = async () => {
     const price_text = document.createElement("li");
     const delete_button = document.createElement("input");
     delete_button.type = "button";
-    delete_button.setAttribute("onclick", `delete_products('${element.id}')`);
+    delete_button.setAttribute(
+      "onclick",
+      `delete_products('${element.id}', this.parentElement)`
+    );
     delete_button.value = "Delete from database";
 
     product_name.textContent = element.product_name;
