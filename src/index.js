@@ -305,8 +305,8 @@ app.post("/api/delete_weeklybuffet_next", async (req, res) => {
   console.log(id);
   try {
     const result = await delete_from_weeklybuffet(id);
-    console.log(rows);
-    return res.json(rows);
+    console.log(result);
+    return res.json(result);
   } catch (error) {
     return res.status(500).json({ error: "Failed to fetch buffet items." });
   }
@@ -396,7 +396,7 @@ app.post("/api/addbuffetproduct", async (req, res) => {
       weekday
     );
     await pool.query(
-      `INSERT INTO wasabi.weekly_buffet_next (product_name, product_description, product_allergens, type, weekday) VALUES ('${productName}', '${productDescription}', '${productAllergens}', '${type}', '${weekday}')`
+      `INSERT INTO wasabi.weekly_buffet_next_week (product_name, product_description, product_allergens, type, weekday) VALUES ('${productName}', '${productDescription}', '${productAllergens}', '${type}', '${weekday}')`
     );
     res.status(201).json({ message: "Product added successfully!" });
   } catch (error) {

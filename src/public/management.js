@@ -221,7 +221,6 @@ get_buffet_nextweek = async () => {
 
 const delete_next_buffet = async (id) => {
   console.log(id);
-
   try {
     const response = await fetch(`/api/delete_weeklybuffet_next?id=${id}`, {
       method: "POST",
@@ -253,12 +252,13 @@ fill_modal = async () => {
     const product_description = document.createElement("li");
     const product_allergens = document.createElement("li");
     const price_text = document.createElement("li");
-    const delete_button = document.createElement("button");
+    const delete_button = document.createElement("input");
+    delete_button.type = "button";
     delete_button.setAttribute(
       "onclick",
       `delete_next_buffet('${element.id}')`
     );
-    delete_button.innerHTML = "Delete from database";
+    delete_button.value = "Delete from database";
     product_name.textContent = element.product_name;
     weekday.textContent = element.weekday;
     product_description.textContent = element.product_description;
@@ -550,12 +550,12 @@ async function populateNextWeekBuffetForm() {
 
       const rowData = JSON.parse(selectedOption.dataset.rowData || "{}");
       console.log("Row Data:", rowData);
+      console.log(rowData.product_allergens);
 
-      document.getElementById("productDescription").value =
-        rowData.product_description || "";
-      document.getElementById("productAllergens").value =
-        rowData.product_allergens || "";
-      document.getElementById("type").value = rowData.type || "";
+      document.getElementById("description").value =
+        rowData.product_description;
+      document.getElementById("allergens").value = rowData.product_allergens;
+      document.getElementById("type").value = rowData.type;
     });
   } catch (error) {
     console.error("Error populating form:", error);
