@@ -47,6 +47,6 @@ document
       document.getElementById("nextWeekBuffetModal").style.display = "none";
     } catch (error) {
       console.error("Error:", error);
-      alert("Error adding product.");
+      alert("Error addding product.");
     }
   });
