@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -55,13 +55,27 @@
           <h2>Log In</h2>
         </div>
         <div class="loginmodal-body">
-          <input type="email" id="loginemail" placeholder="Email" />
-          <input type="password" id="loginpassword" placeholder="Password" />
-          <button id="login_button">Login</button>
+          <form id="login_form" action="api/users/login" method="post">
+            <input
+              type="email"
+              id="loginemail"
+              placeholder="Email"
+              name="email"
+              required
+            />
+            <input
+              type="password"
+              id="loginpassword"
+              placeholder="Password"
+              name="password"
+              required
+            />
+            <button type="submit" id="login_button">Login</button>
+          </form>
           <p id="loginerror_message" style="color: red; display: none">
             Incorrect Email or Password
           </p>
-          <a href="../html/registerprofile.html">Register</a>
+          <a href="register">Register</a>
         </div>
       </div>
     </div>
