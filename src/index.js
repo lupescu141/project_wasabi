@@ -312,6 +312,18 @@ app.post("/api/delete_weeklybuffet_next", async (req, res) => {
   }
 });
 
+app.post("/api/delete_from_products", async (req, res) => {
+  const { id } = req.query;
+  console.log(id);
+  try {
+    const result = await delete_from_products(id);
+    console.log(result);
+    return res.json(result);
+  } catch (error) {
+    return res.status(500).json({ error: "Failed to fetch products items." });
+  }
+});
+
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, path.join(__dirname, "public")); // Ensure directory exists

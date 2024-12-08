@@ -17,6 +17,9 @@
     >
       Next Week's Buffet
     </button>
+    <button id="openDeleteProductModal" data-modal-target="#deleteProductModal">
+      Delete a Product
+    </button>
 
     <!-- Add Product Modal -->
     <div id="addProductModal" class="managementmodal">
@@ -110,6 +113,17 @@
             </select>
           </div>
           <button id="buffetsubmit">submit</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Delete Product Modal -->
+    <div id="deleteProductModal" class="managementmodal">
+      <div class="managementmodal-content" id="managementmodal-content">
+        <span class="managementclose">&times;</span>
+        <h2>Delete a Product</h2>
+        <form id="deleteProductForm" method="post">
+
         </form>
       </div>
     </div>
