@@ -11,6 +11,7 @@ import {
   get_database_session,
   get_buffet_nextweek,
   delete_from_weeklybuffet,
+  delete_from_products,
 } from "./database.js";
 import dotenv from "dotenv";
 dotenv.config();
@@ -321,7 +322,7 @@ app.post("/api/delete_from_products", async (req, res) => {
 app.post("/api/products", async (req, res) => {
   //console.log(type, weekday);
   try {
-    const [rows] = await get_all_from_table(products);
+    const [rows] = await get_all_from_table("products");
     console.log(rows);
     return res.json(rows);
   } catch (error) {

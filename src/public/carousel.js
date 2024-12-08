@@ -129,21 +129,18 @@ function changeDay(newIndex) {
   // Remove the active class from the current day
   days[currentIndex].classList.remove("active");
 
-<<<<<<< HEAD
   setTimeout(() => {
     currentIndex = newIndex;
     days[currentIndex].classList.add("active");
     carouselWrapper.style.transition = "transform 0.5s ease-in-out";
     carouselWrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
   }, 500); // Prevent rapid clicking by matching animation duration
-=======
   // Apply the transform effect without delay
   currentIndex = newIndex;
   days[currentIndex].classList.add("active");
 
   carouselWrapper.style.transition = "transform 0.5s ease-in-out";
   carouselWrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
->>>>>>> 24d86af247e2a483a501346dae77ffa22556175f
 }
 
 let isAnimating = false;
