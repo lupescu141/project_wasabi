@@ -104,11 +104,11 @@ pagelist.forEach((element) => {
 
 app.get("/profile", async (req, res) => {
   const [[db_session]] = await get_database_session(req.signedCookies["keyin"]);
-  console.log(req.signedCookies["keyin"], db_session?.session_id);
-  console.log(
+  //console.log(req.signedCookies["keyin"], db_session?.session_id);
+  /*console.log(
     req.session.userinfo?.user_id,
     JSON.parse(db_session?.data).userinfo?.user_id
-  );
+  );*/
 
   if (db_session?.session_id == undefined) {
     return res.status(401).send("Invalid session");
@@ -175,9 +175,7 @@ app.post("/api/users/register", async (req, res) => {
         .status(400)
         .json({ message: "User already exists with current email!" });
     }
-  } catch (err) {}
 
-  try {
     const cryptedPassword = await cryptPassword(password);
 
     await pool.query(
