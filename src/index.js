@@ -13,6 +13,7 @@ import {
   delete_from_weeklybuffet,
   delete_from_products,
 } from "./database.js";
+
 import dotenv from "dotenv";
 import express from "express";
 import path from "path";
@@ -32,7 +33,6 @@ const __dirname = path.dirname(__filename);
 
 //Mysql strore settings:
 const MySQLStore = expressMySqlSession(session);
-
 const sessionStore = new MySQLStore(
   {
     expiration: 60000,
@@ -95,6 +95,7 @@ const app = express()
     })
   )
   .use(express.static(__dirname + "/public"))
+
   .use("/logout", (req, res) => {
     req.session.destroy((err) => {
       if (!err) {
@@ -249,7 +250,7 @@ const app = express()
       };
       //sessions[sessionid] = { email, user_id };
       //res.set("Set-Cookie", `session=${sessionid}`);
-      return res.status(200).json({ message: "Login successful!" });
+      return res.redirect("/home");
     } catch (err) {
       console.log(err);
     }
