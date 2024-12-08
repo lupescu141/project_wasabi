@@ -221,7 +221,7 @@ get_buffet_nextweek = async () => {
 
 const delete_next_buffet = async (id, thiselement) => {
   console.log(id);
-  thiselement.remove;
+  thiselement.remove();
   try {
     const response = await fetch(`/api/delete_weeklybuffet_next?id=${id}`, {
       method: "POST",
@@ -257,7 +257,7 @@ fill_modal = async () => {
     delete_button.type = "button";
     delete_button.setAttribute(
       "onclick",
-      `delete_next_buffet('${element.id}')`
+      `delete_next_buffet('${element.id}', this.parentElement)`
     );
     delete_button.value = "Delete from database";
     product_name.textContent = element.product_name;
