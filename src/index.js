@@ -324,6 +324,17 @@ app.post("/api/delete_from_products", async (req, res) => {
   }
 });
 
+app.post("/api/products", async (req, res) => {
+  //console.log(type, weekday);
+  try {
+    const [rows] = await get_all_from_table(products);
+    console.log(rows);
+    return res.json(rows);
+  } catch (error) {
+    return res.status(500).json({ error: "Failed to fetch buffet items." });
+  }
+});
+
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, path.join(__dirname, "public")); // Ensure directory exists

@@ -565,6 +565,26 @@ async function populateNextWeekBuffetForm() {
   }
 }
 
+get_products = async () => {
+  try {
+    const response = await fetch(`/api/products`, {
+      method: "POST",
+      body: JSON.stringify(),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const result = await response.json();
+    console.log("Response:", result);
+    return result;
+  } catch (error) {
+    console.error("Error:", error);
+  }
+};
+
 const delete_products = async (id, thiselement) => {
   console.log(id);
   thiselement.remove;
@@ -589,7 +609,7 @@ const delete_products = async (id, thiselement) => {
 
 fill_delete_product_modal = async () => {
   const modal = document.getElementById("deleteProductForm");
-  const all_products = await get_all_from_table(products);
+  const all_products = await get_products();
   console.log(all_products);
 
   all_products.forEach((element) => {
