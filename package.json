@@ -2,8 +2,7 @@
   "name": "wasabi",
   "version": "1.0.0",
   "type": "module",
-  "main": "index.js",
-  "start": "npm star /src/index.js",
+  "main": "src/index.js",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.7",
@@ -23,5 +22,7 @@
     "@playwright/test": "^1.49.0",
     "@types/node": "^22.10.1"
   },
-  "scripts": {}
+  "scripts": {
+    "start": "node src/index.js "
+  }
 }
