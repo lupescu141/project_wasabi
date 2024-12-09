@@ -168,7 +168,7 @@ const delete_from_products = async (id) => {
 const get_profile_info = async (id) => {
   try {
     const result = await pool.query(
-      `SELECT FROM wasabi.users WHERE id = '${id}'`
+      `SELECT name, surname, phonenumber, password FROM wasabi.users WHERE id = '${id}'`
     );
     //console.log(result);
     return result;
@@ -192,4 +192,5 @@ export {
   get_buffet_nextweek,
   delete_from_weeklybuffet,
   delete_from_products,
+  get_profile_info,
 };
