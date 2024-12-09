@@ -116,15 +116,15 @@ const app = express()
     );*/
 
     if (
-      db_session?.session_id == undefined ||
-      JSON.parse(db_session?.data).userinfo?.user_id == undefined
+      db_session?.session_id === undefined ||
+      JSON.parse(db_session?.data).userinfo?.user_id === undefined
     ) {
       return res.status(401).send("Invalid session");
     }
 
     if (
-      req.signedCookies["keyin"] == db_session?.session_id &&
-      req.session.userinfo?.user_id ==
+      req.signedCookies["keyin"] === db_session?.session_id &&
+      req.session.userinfo?.user_id ===
         JSON.parse(db_session?.data).userinfo?.user_id
     ) {
       res
@@ -143,17 +143,17 @@ const app = express()
     const admindata = await get_admindata(req.session.userinfo?.user_email);
 
     if (
-      db_session?.session_id == undefined ||
-      admindata[0][0]?.email == undefined
+      db_session?.session_id === undefined ||
+      admindata[0][0]?.email === undefined
     ) {
       return res.status(401).send("Invalid session");
     }
 
     if (
-      req?.signedCookies["keyin"] == db_session?.session_id &&
-      req?.session?.userinfo?.user_id ==
+      req?.signedCookies["keyin"] === db_session?.session_id &&
+      req?.session?.userinfo?.user_id ===
         JSON.parse(db_session?.data)?.userinfo?.user_id &&
-      admindata[0][0]?.email == req?.session?.userinfo?.user_email
+      admindata[0][0]?.email === req?.session?.userinfo?.user_email
     ) {
       res.sendFile(path.join(__dirname, `/public/management.html`));
     } else {
@@ -207,7 +207,7 @@ const app = express()
     const db_user = await get_userdata(email);
 
     try {
-      if (email == db_user[0][0]?.email) {
+      if (email === db_user[0][0]?.email) {
         return res
           .status(400)
           .json({ message: "User already exists with current email!" });
@@ -238,7 +238,7 @@ const app = express()
           .json({ message: "User with email does not exist!" });
       }
       // Verify login
-      if ((await bcrypt.compare(password, db_user[0][0].password)) == false) {
+      if ((await bcrypt.compare(password, db_user[0][0].password)) === false) {
         return res.status(400).json({ message: "Incorrect password!" });
       }
 
@@ -315,7 +315,7 @@ const app = express()
           .json({ message: "User with email does not exist!" });
       }
       // Verify login
-      if ((await bcrypt.compare(password, db_user[0][0].password)) == false) {
+      if ((await bcrypt.compare(password, db_user[0][0].password)) === false) {
         return res.status(400).json({ message: "Incorrect password!" });
       }
 
@@ -387,12 +387,12 @@ const app = express()
     try {
       //console.log(buffetOrMenu);
       //console.log(menuCategory);
-      if (buffetOrMenu == "Buffet") {
+      if (buffetOrMenu === "Buffet") {
         //console.log("buffet triggered");
         await pool.query(
           `INSERT INTO wasabi.products (product_name, product_description, product_allergens, type, categorie) VALUES ('${productName}', '${productDescription}', '${productAllergens}', '${buffetType}', 'buffet')`
         );
-      } else if (buffetOrMenu == "Menu") {
+      } else if (buffetOrMenu === "Menu") {
         //console.log("menu triggered");
         await pool.query(
           `INSERT INTO wasabi.products (product_name, product_description, product_allergens, categorie, price, image_src) VALUES ('${productName}', '${productDescription}', '${productAllergens}', '${menuCategory}', '${menuPrice}', '${fileName}')`
