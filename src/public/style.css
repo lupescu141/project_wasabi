@@ -87,7 +87,7 @@
   margin-left: 0;
 }
 
-#text-section {
+#about-text-section {
   width: 80%;
   margin: 3% auto;
   font-size: 1em;
@@ -96,12 +96,17 @@
   color: #444;
 }
 
+#about-text-section p {
+  padding: 1%;
+}
+
 #image-section {
   margin-top: 2%;
   width: 80%;
   display: flex;
   justify-content: center;
   margin: 3% auto;
+  margin-bottom: 10%;
 }
 
 #image-section img {
