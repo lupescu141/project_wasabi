@@ -165,19 +165,6 @@ const delete_from_products = async (id) => {
   }
 };
 
-const get_profile_info = async (id) => {
-  try {
-    const result = await pool.query(
-      `SELECT name, surname, phonenumber FROM wasabi.users WHERE id = '${id}'`
-    );
-    //console.log(result);
-    return result;
-  } catch (err) {
-    console.log(err);
-    return err;
-  }
-};
-
 export {
   pool,
   get_all_from_table,
@@ -192,5 +179,4 @@ export {
   get_buffet_nextweek,
   delete_from_weeklybuffet,
   delete_from_products,
-  get_profile_info,
 };
