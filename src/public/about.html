@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -41,7 +41,7 @@
         <ul class="nav_buttons">
           <li><i id="login_icon" class="fa-solid fa-user"></i></li>
           <div id="dropdown_menu" class="dropdown-content">
-            <a href="#" id="profile_option">Profile</a>
+            <a href="profile" id="profile_option">Profile</a>
             <a href="#" id="login_register_option">Login/Register</a>
           </div>
         </ul>
@@ -79,7 +79,6 @@
         </div>
       </div>
     </div>
-
     <header class="mobile_nav">
       <mobileNav>
         <img class="mobile_logo" src="logo1.png" alt="logo" />
@@ -105,7 +104,7 @@
         menuList.style.maxHeight = "0px";
 
         function toggleMenu() {
-          if (menuList.style.maxHeight == "0px") {
+          if (menuList.style.maxHeight === "0px") {
             menuList.style.maxHeight = "300px";
           } else {
             menuList.style.maxHeight = "0px";

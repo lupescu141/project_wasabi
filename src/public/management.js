@@ -312,33 +312,33 @@ fill_modal = async () => {
   const allergens = document.createElement("p");
 
   description.innerText = `Description: ${
-    products.filter((value) => value.product_name == productSelect.value)[0]
+    products.filter((value) => value.product_name === productSelect.value)[0]
       .product_description
   }`;
 
   type.innerText = `Type: ${
-    products.filter((value) => value.product_name == productSelect.value)[0]
+    products.filter((value) => value.product_name === productSelect.value)[0]
       .type
   }`;
 
   allergens.innerText = `Allergens: ${
-    products.filter((value) => value.product_name == productSelect.value)[0]
+    products.filter((value) => value.product_name === productSelect.value)[0]
       .product_allergens
   }`;
 
   productSelect.onchange = () => {
     description.innerText = `Description: ${
-      products.filter((value) => value.product_name == productSelect.value)[0]
+      products.filter((value) => value.product_name === productSelect.value)[0]
         .product_description
     }`;
 
     type.innerText = `Type: ${
-      products.filter((value) => value.product_name == productSelect.value)[0]
+      products.filter((value) => value.product_name === productSelect.value)[0]
         .type
     }`;
 
     allergens.innerText = `Allergens: ${
-      products.filter((value) => value.product_name == productSelect.value)[0]
+      products.filter((value) => value.product_name === productSelect.value)[0]
         .product_allergens
     }`;
   };
@@ -434,10 +434,10 @@ document
     formData.append("productAllergens", productAllergens);
     formData.append("buffetOrMenu", buffetOrMenu);
 
-    if (buffetOrMenu == "Buffet") {
+    if (buffetOrMenu === "Buffet") {
       const buffetType = document.getElementById("buffetType").value;
       formData.append("buffetType", buffetType);
-    } else if (buffetOrMenu == "Menu") {
+    } else if (buffetOrMenu === "Menu") {
       const menuCategory = document.getElementById("menuCategory").value;
       const menuPrice = document.getElementById("menuPrice").value;
       const menuImage = document.getElementById("menuImage").files[0];

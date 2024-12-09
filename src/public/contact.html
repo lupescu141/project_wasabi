@@ -50,12 +50,28 @@
         <ul class="nav_buttons">
           <li><i id="login_icon" class="fa-solid fa-user"></i></li>
           <div id="dropdown_menu" class="dropdown-content">
-            <a href="#" id="profile_option">Profile</a>
+            <a href="profile" id="profile_option">Profile</a>
             <a href="#" id="login_register_option">Login/Register</a>
           </div>
         </ul>
       </nav>
     </header>
+
+    <header class="mobile_nav">
+      <mobileNav>
+        <img class="mobile_logo" src="logo1.png" alt="logo" />
+        <ul id="mobile_navlinks">
+          <li><a href="home">Home</a></li>
+          <li><a href="menu">Menu</a></li>
+          <li><a href="contact">Contact</a></li>
+          <li><a href="about">About</a></li>
+        </ul>
+        <div class="menu-icon">
+          <a id="lang_button" href="">En</a>
+          <i id="login_icon" class="fa-solid fa-user"></i>
+          <i class="fa-solid fa-bars" onclick="toggleMenu()"></i>
+        </div>
+      </mobileNav>
 
     <!-- Modal for login/register -->
     <div id="login_modal" class="loginmodal">
@@ -99,12 +115,6 @@
           <li><a href="about">About</a></li>
         </ul>
         <div class="menu-icon">
-          <a id="lang_button" href="">En</a>
-          <i id="mobile_login_icon" class="fa-solid fa-user"></i>
-            <div id="mobile_dropdown_menu" class="dropdown-content">
-              <a href="profile" id="mobile_profile_option">Profile</a>
-              <a href="#" id="mobile_login_register_option">Login/Register</a>
-            </div>
           <i class="fa-solid fa-bars" onclick="toggleMenu()"></i>
         </div>
       </mobileNav>
@@ -114,7 +124,7 @@
         menuList.style.maxHeight = "0px";
 
         function toggleMenu() {
-          if (menuList.style.maxHeight == "0px") {
+          if (menuList.style.maxHeight === "0px") {
             menuList.style.maxHeight = "300px";
           } else {
             menuList.style.maxHeight = "0px";
@@ -131,7 +141,7 @@
       <h1>Contact</h1>
     </div>
 
-    <div id="contact-container"> 
+    <div id="contact-container">
       <!-- Left Section with Text -->
       <div id="contact-text">
         <ul>
