@@ -74,7 +74,7 @@ const upload = multer({
     }
   },
 });
-
+console.log(process.env.SECRET);
 //initialize app
 const app = express()
   .use(cookieParser(process.env.SECRET)) //cookie parser
