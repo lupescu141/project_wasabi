@@ -64,10 +64,10 @@ jobs:
       - name: "Deploy to Azure Web App"
         id: deploy-to-webapp
         env:
-          MYSQL_HOST: ${{vars.MYSQL_HOST}}
-          MYSQL_USER: ${{vars.MYSQL_USER}}
+          MYSQL_HOST: ${{secret.MYSQL_HOST}}
+          MYSQL_USER: ${{secret.MYSQL_USER}}
           MYSQL_PASSWORD: ${{secrets.MYSQL_PASSWORD}}
-          MYSQL_DATABASE: ${{vars.MYSQL_DATABASE}}
+          MYSQL_DATABASE: ${{secret.MYSQL_DATABASE}}
           SECRET: ${{secrets.SECRET}}
         uses: azure/webapps-deploy@v3
         with:
