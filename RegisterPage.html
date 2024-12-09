@@ -119,10 +119,10 @@
           customConfig
         )
         .then(function (response) {
-          if (response.data.redirect == "/Welcome") {
+          if (response.data.redirect === "/Welcome") {
             window.location = "/Welcome";
           }
-          if (response.data.redirect == "EmailInUse") {
+          if (response.data.redirect === "EmailInUse") {
             InUseError.style.display = "initial";
           }
         });

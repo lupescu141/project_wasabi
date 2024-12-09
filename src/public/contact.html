@@ -50,44 +50,12 @@
         <ul class="nav_buttons">
           <li><i id="login_icon" class="fa-solid fa-user"></i></li>
           <div id="dropdown_menu" class="dropdown-content">
-            <a href="#" id="profile_option">Profile</a>
+            <a href="profile" id="profile_option">Profile</a>
             <a href="#" id="login_register_option">Login/Register</a>
           </div>
         </ul>
       </nav>
     </header>
-
-    <!-- Modal for login/register -->
-    <div id="login_modal" class="loginmodal">
-      <div class="loginmodal-content">
-        <div class="loginmodal-header">
-          <h2>Log In</h2>
-        </div>
-        <div class="loginmodal-body">
-          <form id="login_form" action="api/users/login" method="post">
-            <input
-              type="email"
-              id="loginemail"
-              placeholder="Email"
-              name="email"
-              required
-            />
-            <input
-              type="password"
-              id="loginpassword"
-              placeholder="Password"
-              name="password"
-              required
-            />
-            <button type="submit" id="login_button">Login</button>
-          </form>
-          <p id="loginerror_message" style="color: red; display: none">
-            Incorrect Email or Password
-          </p>
-          <a href="register">Register</a>
-        </div>
-      </div>
-    </div>
 
     <header class="mobile_nav">
       <mobileNav>
@@ -101,20 +69,52 @@
         <div class="menu-icon">
           <a id="lang_button" href="">En</a>
           <i id="mobile_login_icon" class="fa-solid fa-user"></i>
-            <div id="mobile_dropdown_menu" class="dropdown-content">
-              <a href="profile" id="mobile_profile_option">Profile</a>
-              <a href="#" id="mobile_login_register_option">Login/Register</a>
-            </div>
+          <div id="mobile_dropdown_menu" class="dropdown-content">
+            <a href="profile" id="mobile_profile_option">Profile</a>
+            <a href="#" id="mobile_login_register_option">Login/Register</a>
+          </div>
           <i class="fa-solid fa-bars" onclick="toggleMenu()"></i>
         </div>
       </mobileNav>
+
+      <!-- Modal for login/register -->
+      <div id="login_modal" class="loginmodal">
+        <div class="loginmodal-content">
+          <div class="loginmodal-header">
+            <h2>Log In</h2>
+          </div>
+          <div class="loginmodal-body">
+            <form id="login_form" action="api/users/login" method="post">
+              <input
+                type="email"
+                id="loginemail"
+                placeholder="Email"
+                name="email"
+                required
+              />
+              <input
+                type="password"
+                id="loginpassword"
+                placeholder="Password"
+                name="password"
+                required
+              />
+              <button type="submit" id="login_button">Login</button>
+            </form>
+            <p id="loginerror_message" style="color: red; display: none">
+              Incorrect Email or Password
+            </p>
+            <a href="register">Register</a>
+          </div>
+        </div>
+      </div>
 
       <script>
         let menuList = document.getElementById("mobile_navlinks");
         menuList.style.maxHeight = "0px";
 
         function toggleMenu() {
-          if (menuList.style.maxHeight == "0px") {
+          if (menuList.style.maxHeight === "0px") {
             menuList.style.maxHeight = "300px";
           } else {
             menuList.style.maxHeight = "0px";
@@ -131,7 +131,7 @@
       <h1>Contact</h1>
     </div>
 
-    <div id="contact-container"> 
+    <div id="contact-container">
       <!-- Left Section with Text -->
       <div id="contact-text">
         <ul>
