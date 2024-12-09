@@ -327,7 +327,7 @@ const app = express()
       };
       //sessions[sessionid] = { email, user_id };
       //res.set("Set-Cookie", `session=${sessionid}`);
-      return res.status(200).json({ message: "Login successful!" });
+      return res.status(200).redirect("/management");
     } catch (err) {
       console.log(err);
     }
