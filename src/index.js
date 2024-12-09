@@ -207,7 +207,7 @@ const app = express()
     const db_user = await get_userdata(email);
 
     try {
-      if (email == db_user[0][0].email) {
+      if (email == db_user[0][0]?.email) {
         return res
           .status(400)
           .json({ message: "User already exists with current email!" });

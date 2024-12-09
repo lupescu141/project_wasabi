@@ -30,12 +30,6 @@ jobs:
           npm run test --if-present
 
       - name: Zip artifact for deployment
-        env:
-          MYSQL_HOST: ${{secrets.MYSQL_HOST}}
-          MYSQL_USER: ${{secrets.MYSQL_USER}}
-          MYSQL_PASSWORD: ${{secrets.MYSQL_PASSWORD}}
-          MYSQL_DATABASE: ${{secrets.MYSQL_DATABASE}}
-          SECRET: ${{secrets.SECRET}}
         run: zip release.zip ./* -r
 
       - name: Upload artifact for deployment job
@@ -71,12 +65,6 @@ jobs:
 
       - name: "Deploy to Azure Web App"
         id: deploy-to-webapp
-        env:
-          MYSQL_HOST: ${{secrets.MYSQL_HOST}}
-          MYSQL_USER: ${{secrets.MYSQL_USER}}
-          MYSQL_PASSWORD: ${{secrets.MYSQL_PASSWORD}}
-          MYSQL_DATABASE: ${{secrets.MYSQL_DATABASE}}
-          SECRET: ${{secrets.SECRET}}
         uses: azure/webapps-deploy@v3
         with:
           app-name: "projektiwasabi"
