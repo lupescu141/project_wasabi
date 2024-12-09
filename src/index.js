@@ -395,7 +395,7 @@ const app = express()
       } else if (buffetOrMenu === "Menu") {
         //console.log("menu triggered");
         await pool.query(
-          `INSERT INTO wasabi.products (product_name, product_description, product_allergens, categorie, price, image_src) VALUES ('${productName}', '${productDescription}', '${productAllergens}', '${menuCategory}', '${menuPrice}', '${fileName}')`
+          `INSERT INTO wasabi.products (product_name, product_description, product_allergens, categorie, price_text, image_src) VALUES ('${productName}', '${productDescription}', '${productAllergens}', '${menuCategory}', '${menuPrice}€', '${fileName}')`
         );
       }
 
