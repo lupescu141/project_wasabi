@@ -12,6 +12,7 @@ import {
   get_buffet_nextweek,
   delete_from_weeklybuffet,
   delete_from_products,
+  get_profile_info,
 } from "./database.js";
 
 import dotenv from "dotenv";
