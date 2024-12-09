@@ -19,31 +19,3 @@ window.onclick = function (event) {
     document.getElementById("login_modal").style.display = "none";
   }
 };
-
-// Handle login logic
-document.getElementById("login_button").addEventListener("click", function () {
-  const email = document.getElementById("loginemail").value;
-  const password = document.getElementById("loginpassword").value;
-
-  // Send request to check if user exists (backend call)
-  fetch("http://localhost:3000/api/users/login", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ email, password }),
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      if (data.success) {
-        // Redirect or update UI to show user is logged in
-        window.location.href = "/profile"; // Replace with actual redirect
-      } else {
-        // Show error message
-        document.getElementById("error_message").style.display = "block";
-      }
-    })
-    .catch((error) => {
-      console.error("Error logging in:", error);
-    });
-});
