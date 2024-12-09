@@ -19,3 +19,20 @@ window.onclick = function (event) {
     document.getElementById("login_modal").style.display = "none";
   }
 };
+
+// Dropdown menu display
+document
+  .getElementById("mobile_login_icon")
+  .addEventListener("click", function () {
+    console.log("Login icon clicked!"); // Add this log to see if the event is triggered
+    const dropdown = document.getElementById("mobile_dropdown_menu");
+    dropdown.style.display =
+      dropdown.style.display === "block" ? "none" : "block";
+  });
+
+// Show the login modal when clicking 'Login/Register'
+document
+  .getElementById("mobile_login_register_option")
+  .addEventListener("click", function () {
+    document.getElementById("login_modal").style.display = "block";
+  });
