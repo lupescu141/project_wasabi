@@ -46,13 +46,6 @@ jobs:
       id-token: write #This is required for requesting the JWT
 
     steps:
-       env:
-          MYSQL_HOST: ${{vars.MYSQL_HOST}}
-          MYSQL_USER: ${{vars.MYSQL_USER}}
-          MYSQL_PASSWORD: ${{secrets.MYSQL_PASSWORD}}
-          MYSQL_DATABASE: ${{vars.MYSQL_DATABASE}}
-          SECRET: ${{secrets.SECRET}}
-
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
@@ -70,10 +63,14 @@ jobs:
 
       - name: "Deploy to Azure Web App"
         id: deploy-to-webapp
+        env:
+          MYSQL_HOST: ${{vars.MYSQL_HOST}}
+          MYSQL_USER: ${{vars.MYSQL_USER}}
+          MYSQL_PASSWORD: ${{secrets.MYSQL_PASSWORD}}
+          MYSQL_DATABASE: ${{vars.MYSQL_DATABASE}}
+          SECRET: ${{secrets.SECRET}}
         uses: azure/webapps-deploy@v3
         with:
           app-name: "projektiwasabi"
           slot-name: "Production"
           package: .
-
-      
