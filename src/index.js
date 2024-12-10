@@ -12,6 +12,7 @@ import {
   get_buffet_nextweek,
   delete_from_weeklybuffet,
   delete_from_products,
+  get_profile_information,
 } from "./database.js";
 
 import dotenv from "dotenv";
@@ -25,6 +26,7 @@ import multer from "multer";
 import { fileURLToPath } from "url";
 import session from "express-session";
 import expressMySqlSession from "express-mysql-session";
+import { console } from "inspector";
 dotenv.config();
 
 //folder pathing settings
@@ -200,6 +202,12 @@ const app = express()
       console.error("Error adding product:", error);
       res.status(500).json({ error: "Failed to add product." });
     }
+  })
+
+  .post("/api/profileinformation", async (req, res) => {
+    const id = req.session.userinfo.user_id;
+    const [result] = await get_profile_information(id);
+    res.json(result);
   })
 
   .post("/api/users/register", async (req, res) => {
