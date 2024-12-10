@@ -13,8 +13,10 @@ import {
   delete_from_weeklybuffet,
   delete_from_products,
   get_profile_info,
+  migrate_today_data,
 } from "./database.js";
 
+import cron from "node-cron";
 import dotenv from "dotenv";
 import express from "express";
 import path from "path";
@@ -74,6 +76,11 @@ const upload = multer({
       cb(new Error("Invalid file type. Only JPEG, PNG, and GIF are allowed."));
     }
   },
+});
+
+cron.schedule("58 23 * * *", async () => {
+  console.log("Cron running migration...");
+  await migrate_today_data();
 });
 
 //initialize app
