@@ -17,6 +17,15 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
 const apiAddress =
   "https://api.digitransit.fi/routing/v1/routers/hsl/index/graphql"; // cors issues may arise, use proxy or browser plugin if necessary
 
+function addRestaurantMarker(latitude, longitude, info) {
+  const marker = L.marker([latitude, longitude]).addTo(map);
+  marker.bindPopup(info).openPopup();
+}
+
+function addStartMarker(latitude, longitude) {
+  L.marker([latitude, longitude]).addTo(map);
+}
+
 // fetch route with origin and target
 function getRoute(origin, target) {
   // GraphQL query
@@ -59,7 +68,9 @@ function getRoute(origin, target) {
       const d = new Date();
       d.setTime(result.data.plan.itineraries[0].legs[0].startTime);
       pstart.innerHTML = `Start time: ${d}`;
-      d.setTime(result.data.plan.itineraries[0].legs[0].endTime);
+      const legs = result.data.plan.itineraries[0].legs;
+      const lastLeg = legs[legs.length - 1];
+      d.setTime(lastLeg.endTime);
       pend.innerHTML = `End time: ${d}`;
 
       const googleEncodedRoute = result.data.plan.itineraries[0].legs;
@@ -129,7 +140,12 @@ form.addEventListener("submit", async function (event) {
         longitude: end_cordinates.bbox[0],
       }
     );
+
+    addStartMarker(start_cordinates.bbox[1], start_cordinates.bbox[0]);
   } catch (error) {
     console.log(error.message);
   }
 });
+const restaurantLong = 25.08080738381142;
+const restaurantLat = 60.21107519805525;
+addRestaurantMarker(restaurantLat, restaurantLong, "Wasabi - Itis");
