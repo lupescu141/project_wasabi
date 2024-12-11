@@ -120,8 +120,14 @@ form.addEventListener("submit", async function (event) {
     console.log(start_cordinates.bbox[1]);
     console.log(end_cordinates.bbox[1]);
     getRoute(
-      { latitude: start_cordinates.bbox[1], longitude: end_cordinates.bbox[0] },
-      { latitude: end_cordinates.bbox[1], longitude: end_cordinates.bbox[0] }
+      {
+        latitude: start_cordinates.bbox[1],
+        longitude: start_cordinates.bbox[0],
+      },
+      {
+        latitude: end_cordinates.bbox[1],
+        longitude: end_cordinates.bbox[0],
+      }
     );
   } catch (error) {
     console.log(error.message);
