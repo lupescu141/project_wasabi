@@ -184,14 +184,26 @@ const migrate_today_data = async () => {
     const today = new Date().getDay(); // 0 (Sunday) to 6 (Saturday)
     console.log(`Today's weekday is: ${today}`);
 
+    const weekdays = [
+      "sunday",
+      "monday",
+      "tuesday",
+      "wednesday",
+      "thursday",
+      "friday",
+      "saturday",
+    ];
+
+    console.log(weekdays[today]);
+
     // Step 1: Delete today's data from weekly_buffet
     await pool.query(
-      `DELETE FROM wasabi.weekly_buffet WHERE weekday = '${today}'`
+      `DELETE FROM wasabi.weekly_buffet WHERE weekday = '${day}'`
     );
     console.log("Deleted existing data for today from weekly_buffet.");
 
     // Step 2: Migrate today's data from weekly_buffet_next to weekly_buffet
-    const [rows] = await get_buffet_item_next_week(today);
+    const [rows] = await get_buffet_item_next_week(day);
 
     if (rows.length > 0) {
       for (const item of rows) {
@@ -229,4 +241,6 @@ export {
   get_buffet_nextweek,
   delete_from_weeklybuffet,
   delete_from_products,
+  get_profile_info,
+  migrate_today_data,
 };

@@ -467,7 +467,6 @@ mobileNav ul li a {
 /* Mobile_nav End: */
 
 /* Map Start: */
-
 /* Map End: */
 
 /* Profile Page Start */
@@ -730,7 +729,7 @@ button[type="submit"]:hover {
   bottom: 0;
   width: 100%;
   height: 3em;
-  z-index: 2;
+  z-index: 1000;
 }
 
 .bottom_nav ul {

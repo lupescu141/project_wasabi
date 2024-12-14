@@ -9,6 +9,7 @@ password: Itjustworks1
 Home URL: /home
 Adminlogin URL: /admin/login
 Hallintapaneeli URL: /management
+logout URL: /logout
 
 Hallintapaneeli (Vain admin käyttäjillä oikeus):
 
