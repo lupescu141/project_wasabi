@@ -12,6 +12,7 @@ import {
   get_buffet_nextweek,
   delete_from_weeklybuffet,
   delete_from_products,
+  get_profile_information,
   migrate_today_data,
 } from "./database.js";
 
@@ -26,6 +27,7 @@ import multer from "multer";
 import { fileURLToPath } from "url";
 import session from "express-session";
 import expressMySqlSession from "express-mysql-session";
+import { console } from "inspector";
 dotenv.config();
 
 //folder pathing settings
@@ -212,6 +214,12 @@ const app = express()
     }
   })
 
+  .post("/api/profileinformation", async (req, res) => {
+    const id = req.session.userinfo.user_id;
+    const [result] = await get_profile_information(id);
+    res.json(result);
+  })
+
   .post("/api/users/register", async (req, res) => {
     const { name, surname, email, phone, password, confirmPassword } = req.body;
     const db_user = await get_userdata(email);
@@ -337,7 +345,7 @@ const app = express()
       };
       //sessions[sessionid] = { email, user_id };
       //res.set("Set-Cookie", `session=${sessionid}`);
-      return res.status(200).json({ message: "Login successful!" });
+      return res.status(200).redirect("/management");
     } catch (err) {
       console.log(err);
     }

@@ -165,6 +165,19 @@ const delete_from_products = async (id) => {
   }
 };
 
+const get_profile_information = async (id) => {
+  try {
+    const result = await pool.query(
+      `SELECT name, surname, phonenumber FROM wasabi.users WHERE id = '${id}'`
+    );
+    //console.log(result);
+    return result;
+  } catch (err) {
+    console.log(err);
+    return err;
+  }
+};
+
 const migrate_today_data = async () => {
   try {
     // Get today's weekday
@@ -216,5 +229,4 @@ export {
   get_buffet_nextweek,
   delete_from_weeklybuffet,
   delete_from_products,
-  migrate_today_data,
 };
