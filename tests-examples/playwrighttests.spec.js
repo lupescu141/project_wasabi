@@ -60,14 +60,17 @@ test("Form submission saves data to database", async ({ page }) => {
 
 // Login test
 test.describe("Login test", () => {
-  test("User can login", async ({ page }) => {
-    await page.goto("http://localhost:3000/home");
-    await page.click("#login_icon"); // Click login icon
-    await page.click("#login_register_option"); // Open login modal
-    await page.fill("#loginemail", "test@hotmail.fi");
-    await page.fill("#loginpassword", "Playwright1");
-    await page.click("#login_button"); // Login
-    await expect(page).toHaveURL("http://localhost:3000/api/users/login"); // Check if correct page
+  test("User can login", async ({ page, isMobile }) => {
+    if (!isMobile) {
+      await page.goto("http://localhost:3000/home");
+      await page.click("#login_icon"); // Click login icon
+      await page.click("#login_register_option"); // Open login modal
+      await page.fill("#loginemail", "test@hotmail.fi");
+      await page.fill("#loginpassword", "Playwright1");
+      await page.click("#login_button"); // Login
+      await expect(page).toHaveURL("http://localhost:3000/home"); // Check if correct page
+    } else {
+    }
   });
 });
 

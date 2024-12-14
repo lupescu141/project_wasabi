@@ -48,6 +48,37 @@
       </nav>
     </header>
 
+    <!-- Modal for login/register -->
+    <div id="login_modal" class="loginmodal">
+      <div class="loginmodal-content">
+        <div class="loginmodal-header">
+          <h2>Log In</h2>
+        </div>
+        <div class="loginmodal-body">
+          <form id="login_form" action="api/users/login" method="post">
+            <input
+              type="email"
+              id="loginemail"
+              placeholder="Email"
+              name="email"
+              required
+            />
+            <input
+              type="password"
+              id="loginpassword"
+              placeholder="Password"
+              name="password"
+              required
+            />
+            <button type="submit" id="login_button">Login</button>
+          </form>
+          <p id="loginerror_message" style="color: red; display: none">
+            Incorrect Email or Password
+          </p>
+          <a href="register">Register</a>
+        </div>
+      </div>
+    </div>
     <header class="mobile_nav">
       <mobileNav>
         <img class="mobile_logo" src="logo1.png" alt="logo" />
@@ -68,38 +99,6 @@
         </div>
       </mobileNav>
 
-      <!-- Modal for login/register -->
-      <div id="login_modal" class="loginmodal">
-        <div class="loginmodal-content">
-          <div class="loginmodal-header">
-            <h2>Log In</h2>
-          </div>
-          <div class="loginmodal-body">
-            <form id="login_form" action="api/users/login" method="post">
-              <input
-                type="email"
-                id="loginemail"
-                placeholder="Email"
-                name="email"
-                required
-              />
-              <input
-                type="password"
-                id="loginpassword"
-                placeholder="Password"
-                name="password"
-                required
-              />
-              <button type="submit" id="login_button">Login</button>
-            </form>
-            <p id="loginerror_message" style="color: red; display: none">
-              Incorrect Email or Password
-            </p>
-            <a href="register">Register</a>
-          </div>
-        </div>
-      </div>
-
       <script>
         let menuList = document.getElementById("mobile_navlinks");
         menuList.style.maxHeight = "0px";
@@ -116,6 +115,14 @@
         src="https://kit.fontawesome.com/f8e1a90484.js"
         crossorigin="anonymous"
       ></script>
+    </header>
+
+    <header class="home_banner">
+      <img
+        src="home_banner.png"
+        alt="home banner image"
+        class="home_banner_img"
+      />
     </header>
 
     <div id="header">
