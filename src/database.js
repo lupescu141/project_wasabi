@@ -241,6 +241,6 @@ export {
   get_buffet_nextweek,
   delete_from_weeklybuffet,
   delete_from_products,
-  get_profile_info,
+  get_profile_information,
   migrate_today_data,
 };

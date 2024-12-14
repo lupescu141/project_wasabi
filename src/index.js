@@ -12,7 +12,7 @@ import {
   get_buffet_nextweek,
   delete_from_weeklybuffet,
   delete_from_products,
-  get_profile_info,
+  get_profile_information,
   migrate_today_data,
 } from "./database.js";
 
@@ -34,6 +34,9 @@ dotenv.config();
 //folder pathing settings
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+//Triggering a function at a certain time
+import cron from "node-cron";
 
 //Mysql strore settings:
 const MySQLStore = expressMySqlSession(session);
@@ -79,6 +82,7 @@ const upload = multer({
   },
 });
 
+//Editing buffet carousel data at midnight
 cron.schedule("58 23 * * *", async () => {
   console.log("Cron running migration...");
   await migrate_today_data();
