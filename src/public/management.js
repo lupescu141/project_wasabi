@@ -252,7 +252,6 @@ fill_modal = async () => {
     const weekday = document.createElement("li");
     const product_description = document.createElement("li");
     const product_allergens = document.createElement("li");
-    const price_text = document.createElement("li");
     const delete_button = document.createElement("input");
     delete_button.type = "button";
     delete_button.setAttribute(
@@ -260,16 +259,14 @@ fill_modal = async () => {
       `delete_next_buffet('${element.id}', this.parentElement)`
     );
     delete_button.value = "Delete from database";
-    product_name.textContent = element.product_name;
-    weekday.textContent = element.weekday;
-    product_description.textContent = element.product_description;
-    product_allergens.textContent = element.product_allergens;
-    price_text.textContent = element.price_text;
+    product_name.innerHTML = `<li><p>Product_name:</p><p>${element.product_name}</p></li>`;
+    weekday.innerHTML = `<li><p>Weekday:</p><p>${element.weekday}</p></li>`;
+    product_description.innerHTML = `<li><p>Product_description:</p><p>${element.product_description}</p></li>`;
+    product_allergens.innerHTML = `<li><p>Product_allergens:</p><p>${element.product_allergens}</p></li>`;
     ul.appendChild(product_name);
     ul.appendChild(weekday);
     ul.appendChild(product_description);
     ul.appendChild(product_allergens);
-    ul.appendChild(price_text);
     ul.appendChild(delete_button);
     modal.insertBefore(ul, modal.firstChild);
   });
@@ -479,12 +476,10 @@ document.getElementById("buffetsubmit").addEventListener("click", async (e) => {
   const productName = document.getElementById("product-select").value.trim();
   const weekday = document.getElementById("weekday-select").value.trim();
   const productDescription = document
-    .getElementById("productDescription")
+    .getElementById("description")
     .value.trim();
   const type = document.getElementById("type").value.trim();
-  const productAllergens = document
-    .getElementById("productAllergens")
-    .value.trim();
+  const productAllergens = document.getElementById("allergens").value.trim();
 
   // Ensure all fields are filled
   if (!productName || !weekday) {
@@ -499,6 +494,7 @@ document.getElementById("buffetsubmit").addEventListener("click", async (e) => {
     type,
     weekday,
   };
+  console.log(data);
 
   try {
     const response = await fetch("/api/addbuffetproduct", {

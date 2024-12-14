@@ -165,7 +165,7 @@ const delete_from_products = async (id) => {
   }
 };
 
-const get_profile_info = async (id) => {
+const get_profile_information = async (id) => {
   try {
     const result = await pool.query(
       `SELECT name, surname, phonenumber FROM wasabi.users WHERE id = '${id}'`
