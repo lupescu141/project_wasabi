@@ -1,37 +1,49 @@
 import { test, expect } from "@playwright/test";
 
-import { get_userdata, get_test_menu } from "../src/database.js";
+import { get_test_menu } from "../src/database.js";
 
 // Nav test
 test.describe("Navigation test", () => {
-  test("Navigation functioning corrrectly", async ({ page }) => {
-    await page.goto("http://localhost:3000/home");
-    await page.click(".fa-solid"); // Open navlinks in mobile
-    await page.click("text=Menu"); // Click navlink
-    await expect(page).toHaveURL("http://localhost:3000/menu"); // Check if correct page
-    await page.click(".fa-solid"); // Open navlinks in mobile
-    await page.click("text=Contact"); // Click navlink
-    await expect(page).toHaveURL("http://localhost:3000/contact"); // Check if correct page
-    await page.click(".fa-solid"); // Open navlinks in mobile
-    await page.click("text=About"); // Click navlink
-    await expect(page).toHaveURL("http://localhost:3000/about"); // Check if correct page
-    await page.click(".fa-solid"); // Open navlinks in mobile
-    await page.click("text=Home"); // Click navlink
-    await expect(page).toHaveURL("http://localhost:3000/home"); // Check if correct page
+  test("Navigation functioning corrrectly", async ({ page, isMobile }) => {
+    if (!isMobile) {
+      await page.goto("http://localhost:3000/home");
+      await page.click(".fa-solid"); // Open navlinks in mobile
+      await page.click("text=Menu"); // Click navlink
+      await expect(page).toHaveURL("http://localhost:3000/menu"); // Check if correct page
+      await page.click(".fa-solid"); // Open navlinks in mobile
+      await page.click("text=Contact"); // Click navlink
+      await expect(page).toHaveURL("http://localhost:3000/contact"); // Check if correct page
+      await page.click(".fa-solid"); // Open navlinks in mobile
+      await page.click("text=About"); // Click navlink
+      await expect(page).toHaveURL("http://localhost:3000/about"); // Check if correct page
+      await page.click(".fa-solid"); // Open navlinks in mobile
+      await page.click("text=Home"); // Click navlink
+      await expect(page).toHaveURL("http://localhost:3000/home"); // Check if correct page
+    } else {
+      await page.goto("http://localhost:3000/home");
+      await page.click("text=Menu"); // Click navlink
+      await expect(page).toHaveURL("http://localhost:3000/menu"); // Check if correct page
+      await page.click("text=Contact"); // Click navlink
+      await expect(page).toHaveURL("http://localhost:3000/contact"); // Check if correct page
+      await page.click("text=About"); // Click navlink
+      await expect(page).toHaveURL("http://localhost:3000/about"); // Check if correct page
+      await page.click("text=Home"); // Click navlink
+      await expect(page).toHaveURL("http://localhost:3000/home"); // Check if correct page
+    }
   });
 });
 
 //Visual comparison tests
-test("Visual comparison of home page in desktop", async ({ page }) => {
-  await page.goto("http://localhost:3000/home");
-  const screenshot = await page.screenshot();
-  expect(screenshot).toMatchSnapshot("home.png");
-});
-
-test("Visual comparison of home page in mobile", async ({ page }) => {
-  await page.goto("http://localhost:3000/home");
-  const screenshot = await page.screenshot();
-  expect(screenshot).toMatchSnapshot("mobilehome.png");
+test("Visual comparison of home page", async ({ page, isMobile }) => {
+  if (!isMobile) {
+    await page.goto("http://localhost:3000/home");
+    const screenshot = await page.screenshot();
+    expect(screenshot).toMatchSnapshot("home.png");
+  } else {
+    await page.goto("http://localhost:3000/home");
+    const screenshot = await page.screenshot();
+    expect(screenshot).toMatchSnapshot("mobilehome.png");
+  }
 });
 
 // Form test (add product)
@@ -70,29 +82,55 @@ test.describe("Login test", () => {
       await page.click("#login_button"); // Login
       await expect(page).toHaveURL("http://localhost:3000/home"); // Check if correct page
     } else {
+      await page.goto("http://localhost:3000/home");
+      await page.click("#mobile_login_icon"); // Click login icon
+      await page.click("#mobile_login_register_option"); // Open login modal
+      await page.fill("#loginemail", "test@hotmail.fi");
+      await page.fill("#loginpassword", "Playwright1");
+      await page.click("#login_button"); // Login
+      await expect(page).toHaveURL("http://localhost:3000/home"); // Check if correct page
     }
   });
 });
 
 // Authentication test
 test.describe("Authentication test", () => {
-  let page;
   // Login
-  test.beforeAll(async ({ browser }) => {
-    page = await browser.newPage();
-    await page.goto("http://localhost:3000/home");
-    await page.click("#login_icon");
-    await page.click("#login_register_option");
-    await page.fill("#loginemail", "test@hotmail.fi");
-    await page.fill("#loginpassword", "Playwright1");
-    await page.click("#login_button");
+  test.beforeAll(async ({ page, isMobile }) => {
+    if (!isMobile) {
+      await page.goto("http://localhost:3000/home");
+      await page.click("#login_icon"); // Click login icon
+      await page.click("#login_register_option"); // Open login modal
+      await page.fill("#loginemail", "test@hotmail.fi");
+      await page.fill("#loginpassword", "Playwright1");
+      await page.click("#login_button"); // Login
+      await expect(page).toHaveURL("http://localhost:3000/home"); // Check if correct page
+    } else {
+      await page.goto("http://localhost:3000/home");
+      await page.click("#mobile_login_icon"); // Click login icon
+      await page.click("#mobile_login_register_option"); // Open login modal
+      await page.fill("#loginemail", "test@hotmail.fi");
+      await page.fill("#loginpassword", "Playwright1");
+      await page.click("#login_button"); // Login
+      await expect(page).toHaveURL("http://localhost:3000/home"); // Check if correct page
+    }
   });
   // Test if user can access protected content
-  test("User can view protected content after login", async () => {
+  test("User can view protected content after login", async ({
+    page,
+    isMobile,
+  }) => {
     // Try to access protected content
-    await page.goto("http://localhost:3000/home");
-    await page.click("#login_icon"); // Click login icon
-    await page.click("#profile_option"); // Click on the profile option
-    await expect(page).toHaveURL("http://localhost:3000/profile"); // Verify correct URL
+    if (!isMobile) {
+      await page.goto("http://localhost:3000/home");
+      await page.click("#login_icon"); // Click login icon
+      await page.click("#profile_option"); // Click on the profile option
+      await expect(page).toHaveURL("http://localhost:3000/profile"); // Verify correct URL
+    } else {
+      await page.goto("http://localhost:3000/home");
+      await page.click("#mobile_login_icon"); // Click login icon
+      await page.click("#mobile_profile_option"); // Click on the profile option
+      await expect(page).toHaveURL("http://localhost:3000/profile"); // Verify correct URL
+    }
   });
 });
