@@ -113,6 +113,19 @@ const get_menu = async (categorie) => {
   }
 };
 
+const get_test_menu = async (name) => {
+  try {
+    const result = await pool.query(
+      `SELECT * FROM wasabi.products WHERE product_name = '${name}'`
+    );
+    //console.log(result);
+    return result;
+  } catch (err) {
+    console.log(err);
+    return err;
+  }
+};
+
 const get_admindata = async (email) => {
   try {
     const result = await pool.query(
@@ -243,4 +256,5 @@ export {
   delete_from_products,
   get_profile_information,
   migrate_today_data,
+  get_test_menu,
 };

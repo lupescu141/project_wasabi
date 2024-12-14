@@ -11,6 +11,8 @@ Adminlogin URL: /admin/login
 Hallintapaneeli URL: /management
 logout URL: /logout
 
+"profile", eli profiilin muokkaus ei muokkaa käyttäjän tietoja tietokannassa
+
 Hallintapaneeli (Vain admin käyttäjillä oikeus):
 
 - tilaustenseuranta
